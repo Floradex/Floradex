@@ -1,0 +1,443 @@
+/*Font*/
+
+html * {
+    font-family: Calibri, sans-serif !important;
+    font-size: 20px;
+}
+/* 
+    Colors
+
+*/
+
+.floracolor-ironsight-grey {
+    background-color: #6A6561;
+}
+
+.floracolor-main {
+    background-color: #BDAC92;
+}
+
+.floracolor-dark {
+    background-color: #7B614B;
+}
+
+.floracolor-yellow {
+    background-color: #F7D031;
+}
+
+.floradex-grey {
+    background-color: #514F50;
+}
+
+.floradex-dark-grey {
+    background-color: #2A292E;
+}
+
+.bar-top-no-border {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none;
+    border-bottom: none;
+}
+
+.background-gradient-dark {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(top, red, red 70%, transparent 70%, transparent 100%);
+    background-image: -webkit-linear-gradient(top, red, red 70%, transparent 70%, transparent 100%)
+}
+
+.bg-gradient-dark {
+    background: #6b6c67;
+    /* Old browsers */
+    
+    background: -moz-linear-gradient(left, #6b6c67 0%, #656660 33%, #6b6c67 33%, #62625a 66%, #656660 66%, #656660 66%, #62625a 100%, #2989d8 100%, #7db9e8 100%);
+    /* FF3.6+ */
+    
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #6b6c67), color-stop(33%, #656660), color-stop(33%, #6b6c67), color-stop(66%, #62625a), color-stop(66%, #656660), color-stop(66%, #656660), color-stop(100%, #62625a), color-stop(100%, #2989d8), color-stop(100%, #7db9e8));
+    /* Chrome,Safari4+ */
+    
+    background: -webkit-linear-gradient(left, #6b6c67 0%, #656660 33%, #6b6c67 33%, #62625a 66%, #656660 66%, #656660 66%, #62625a 100%, #2989d8 100%, #7db9e8 100%);
+    /* Chrome10+,Safari5.1+ */
+    
+    background: -o-linear-gradient(left, #6b6c67 0%, #656660 33%, #6b6c67 33%, #62625a 66%, #656660 66%, #656660 66%, #62625a 100%, #2989d8 100%, #7db9e8 100%);
+    /* Opera 11.10+ */
+    
+    background: -ms-linear-gradient(left, #6b6c67 0%, #656660 33%, #6b6c67 33%, #62625a 66%, #656660 66%, #656660 66%, #62625a 100%, #2989d8 100%, #7db9e8 100%);
+    /* IE10+ */
+    
+    background: linear-gradient(to right, #6b6c67 0%, #656660 33%, #6b6c67 33%, #62625a 66%, #656660 66%, #656660 66%, #62625a 100%, #2989d8 100%, #7db9e8 100%);
+    /* W3C */
+    
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#6b6c67', endColorstr='#7db9e8', GradientType=1);
+    /* IE6-9 */
+}
+
+.bg-gradient-meh {
+    background: #bab9a1;
+    /* Old browsers */
+    
+    background: -moz-linear-gradient(left, #bab9a1 0%, #bab9a1 33%, #b3b29a 33%, #b3b29a 66%, #a9aa94 66%, #a9aa94 100%, #2989d8 100%, #7db9e8 100%);
+    /* FF3.6+ */
+    
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #bab9a1), color-stop(33%, #bab9a1), color-stop(33%, #b3b29a), color-stop(66%, #b3b29a), color-stop(66%, #a9aa94), color-stop(100%, #a9aa94), color-stop(100%, #2989d8), color-stop(100%, #7db9e8));
+    /* Chrome,Safari4+ */
+    
+    background: -webkit-linear-gradient(left, #bab9a1 0%, #bab9a1 33%, #b3b29a 33%, #b3b29a 66%, #a9aa94 66%, #a9aa94 100%, #2989d8 100%, #7db9e8 100%);
+    /* Chrome10+,Safari5.1+ */
+    
+    background: -o-linear-gradient(left, #bab9a1 0%, #bab9a1 33%, #b3b29a 33%, #b3b29a 66%, #a9aa94 66%, #a9aa94 100%, #2989d8 100%, #7db9e8 100%);
+    /* Opera 11.10+ */
+    
+    background: -ms-linear-gradient(left, #bab9a1 0%, #bab9a1 33%, #b3b29a 33%, #b3b29a 66%, #a9aa94 66%, #a9aa94 100%, #2989d8 100%, #7db9e8 100%);
+    /* IE10+ */
+    
+    background: linear-gradient(to right, #bab9a1 0%, #bab9a1 33%, #b3b29a 33%, #b3b29a 66%, #a9aa94 66%, #a9aa94 100%, #2989d8 100%, #7db9e8 100%);
+    /* W3C */
+    
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#bab9a1', endColorstr='#7db9e8', GradientType=1);
+    /* IE6-9 */
+}
+/*.color-col-0 {
+    color: #6D6A5A;
+    background-color: #6B6C67;
+}
+
+.color-col-1 {
+    color: #5D5C50;
+    background-color: #656660;
+}
+
+.color-col-2 {
+    color: #4B4C42;
+    background-color: #62625A;
+}*/
+/*
+    Vorschau
+*/
+/*.vorschau-item {
+    
+    display: block;
+    margin-left: auto;
+    
+    width: 100px;
+}*/
+
+.vorschau-item-large {
+    display: block;
+    margin: auto;
+    /* bring your own prefixes */
+    
+    max-width: 90%;
+    padding-top: 15%;
+}
+
+.vorschau-div {}
+/* 
+        Modal floradex image 
+*/
+
+.floradex-div {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.floradex-image {
+    padding: 10%;
+    max-width: 90%;
+    max-height: 90%;
+}
+/*
+  Popover Menu 
+
+*/
+/* https://github.com/driftyco/ionic/issues/1963 */
+
+.popover {
+    padding-bottom: 5em;
+    /*width: 75px;*/
+}
+
+.small {
+    font-size: 12px;
+    text-align: center;
+}
+
+.popover-scroller {
+    height: 300px;
+}
+
+.popover-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.popover-photo-hoverble:hover {
+    background-color: #E2CC8B;
+}
+
+.photo-selected {
+    background-color: #D4B349;
+}
+/*.popover-backdrop.active{
+  background:none !important;
+}*/
+/* Fixed cols */
+
+.col-menu {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 100px;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 100px;
+    -ms-flex: 0 0 100px;
+    flex: 0 0 100px;
+    max-width: 100px;
+    margin-left: 100px;
+}
+/* Solution
+http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-click-css
+*/
+/*
+position: fixed (fest am bildschrom);
+absolute (lostgelößt, außerhalb des texflusses)
+*/
+/*
+quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-click-css
+*/
+
+.flora-menu .superMenuName {
+    text-align: left;
+    font-size: 20px;
+    color: white;
+    /*margin-left: 5px;*/
+}
+
+.flora-menu .submenu {
+    /*border-top: solid;
+    border-top-width: 1.3em;*/
+    /*border-right: solid;
+    border-right-width: 1px;
+    border-right-color: gray;*/
+    
+    width: 32.85%;
+    /*padding: 1em;*/
+    
+    float: left;
+    bottom: 0;
+    /* bottom:0;*/
+    /*min-width: 200px;*/
+    /*padding: 5px 0px 5px 0px;*/
+}
+
+.flora-menu ul {
+    list-style: none;
+    display: table;
+    width: 100%;
+}
+
+.flora-menu li {
+    padding-top: 5px;
+    display: table-cell;
+    list-style: none;
+    text-align: center;
+    font-size: 13px;
+    color: #C8C6BB;
+    /* height: 100px;*/
+}
+
+.flora-menu .floramenu-li-item-highlighted {
+    background-color: #F7D031;
+    color: white;
+}
+
+.flora-menu .floramenu-li-item-selected {
+    color: white;
+}
+
+.flora-menu {
+    height: 105px;
+    position: fixed;
+    bottom: 0em;
+    width: calc(100% - 250px);
+    /*border-top: solid;
+  border-width: 1.5em;*/
+    /*border-color: #6D6A5B;*/
+}
+
+.flora-menu li:hover {
+    color: white;
+    background-color: #F7D031;
+    border: 0;
+    cursor: pointer;
+}
+
+.second-row-image {
+    height: 57px;
+    width: 57px;
+}
+/* 
+    Modal Image
+*/
+
+.transparent {
+    background: transparent !important;
+}
+
+.image-modal {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0;
+}
+
+.fullscreen-image {
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+/* SLide in animation
+*/
+
+.slide-in-right {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.slide-in-right.ng-enter,
+.slide-in-right > .ng-enter {
+    -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
+    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
+}
+
+.slide-in-right.ng-enter-active,
+.slide-in-right > .ng-enter-active {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.slide-in-right.ng-leave,
+.slide-in-right > .ng-leave {
+    -webkit-transition: all ease-in-out 250ms;
+    transition: all ease-in-out 250ms;
+}
+/*SIdebar*/
+
+.no-style-list {
+    background-color: #2A292E;
+    color: white;
+    border: none;
+}
+
+.main-menu-list {
+    margin-top: 20em;
+    padding-top: 10em;
+}
+/* 
+    Sidebar always visible
+*/
+
+@media (min-width: 600px) {
+    .menu-content {
+        right: 250px !important;
+        width: calc(100% - 250px) !important;
+    }
+    .menu-right {
+        width: 250px !important;
+        z-index: 11;
+    }
+}
+/* Sidebar content */
+
+.photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.photo:hover {
+    background-color: #BDA65A;
+}
+/*scrollbar always visible*/
+
+.result-scroller .ng-animate .scroll-bar {
+    visibility: visible !important;
+}
+
+.result-scroller .scroll-bar-fade-out {
+    opacity: 1 !important
+}
+
+.result-scroller {
+    padding-top: 1em;
+    border-bottom: solid;
+    border-width: 1px;
+    margin-left: 15px;
+    height: 600px;
+}
+
+.sidebar-has-footer {
+    bottom: 105px;
+    /*change also in footer*/
+}
+/*footer*/
+
+.sidebar-footer {
+    padding: 0px;
+    height: 105px !important;
+}
+
+.sidebar-above-header-button {
+    position: absolute;
+    top: -6px;
+    width: 100%;
+    height: 8px;
+    background-color: #18171C !important;
+}
+
+.sidebar-footer .text {
+    width: 100%;
+    padding-top: 50px;
+    color: white;
+    text-align: center;
+    /*font-weight: bold;*/
+}
+/* Modal Overlay more info view */
+
+.button-large,
+.button-large .icon:before{
+  font-size: 9000px !important;
+  max-width: 9000px !important;
+  max-height:9000px !important;
+}
+
+.modal-backdrop-bg {
+    background: none;
+}
+
+.modal-open {
+    pointer-events: auto;
+}
+
+.modal-open .modal-backdrop {
+    pointer-events: none;
+}
+
+.modal-open.loading-active .modal,
+.modal-open.loading-active .modal-backdrop {
+    pointer-events: auto;
+}

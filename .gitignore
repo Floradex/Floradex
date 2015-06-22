@@ -1,0 +1,13 @@
+#ignore binaries
+*.class
+bin/
+bin/bgbmGet
+bin/dataHandling
+bin/main
+bin/thumbnailMaker
+resources/images
+resources/Metadata
+resources/output
+resources/allPlants.json
+allPlants.json
+menuStructure.json

@@ -1,0 +1,467 @@
+angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
+
+.factory('Plants', function($http) {
+    return {
+        all: function(callback) {
+            return $http.get('resources/allPlants.json').success(callback);
+        }
+    }
+})
+
+.factory('MenuData', function($http) {
+    return {
+        all: function(callback) {
+            return $http.get('resources/menuStructure.json').success(callback);
+        }
+    }
+})
+	
+//if cookies are disabled localStorage will not work and throw the error that the operation "is unsafe"
+.factory('PlantStorage', function() {
+	return { 
+		init: function() {
+			//backup to clear storage
+			//localStorage.clear();
+			console.log(new String("Trying to load plants from storage...") + "");
+			//var plantString = window.localStorage['plants'];
+			var plantString = window.localStorage.getItem('plants');
+			if (plantString) {
+				console.log(plantString.split(";"));
+				return plantString.split(";");
+			}
+			console.log(new String("no data in storage found") + "");
+			return [];
+		},
+		saveToHerbarium: function(plant) {
+			//var savedPlants = window.localStorage['plants'];
+			var savedPlants = window.localStorage.getItem('plants');
+			if (savedPlants) {
+				console.log(new String("Plants in own herbarium: ") + savedPlants);
+				console.log(new String("Adding plant ") + plant);
+				//window.localStorage['plants'] = angular.toJson(savedPlants + ";" + plant);
+				window.localStorage.setItem('plants', savedPlants + ";" + plant);
+			} else {
+				console.log(new String("Saving plant ") + plant + new String(" in empty storage"));
+				//window.localStorage['plants'] = angular.toJson(plant);
+				window.localStorage.setItem('plants', plant);
+			}
+		},
+		loadHerbarium: function() {
+			//var plants = window.localStorage['plants'].split(";");
+			var plants = window.localStorage.getItem('plants').split(";");
+			if (plants) {
+				console.log(plants);
+				return plants;
+			} else {
+				return [];
+			}
+		}
+	}
+})
+
+.controller('MainCtrl', function($scope, $ionicScrollDelegate, $ionicPopover, $ionicModal, Plants, MenuData, PlantStorage) { // $ionicPopover,
+        // debugging:
+        var showModalViewsOnStartup = false;
+        // vars
+        var plantIdsLookup = {};
+		//the saved plants from 'my herbarium', if plants were saved earlier
+        $scope.herbarium = PlantStorage.init();
+
+        // results
+        $scope.countOfResults = 0;
+        $scope.results = null;
+        $scope.resultSettings = {
+                size: 100
+            }
+            // Merkmale
+        $scope.selectedMerkmale = {};
+        // Vorschau
+        $scope.vorschauLebensform = [];
+        $scope.vorschauBluete = [];
+        $scope.vorschauKopf = [];
+        $scope.vorschauBlatt = [];
+        // Modal view
+        $scope.imageSrc = '';
+
+        // load Json
+        Plants.all(function(plants) { // Plants json
+            $scope.plants = plants;
+            $scope.results = plants;
+
+            // load all plants into lookup
+            for (var i = 0, len = plants.length; i < len; i++) {
+                plantIdsLookup[plants[i].SampleID] = plants[i];
+            }
+            $scope.updateNumbers();
+            // Hier dinge testen
+        });
+
+        MenuData.all(function(menuData) { // Menu data json
+            // Sort it
+            var lookup = {};
+            for (var i = 0, len = menuData.length; i < len; i++) {
+                lookup[menuData[i].name] = menuData[i];
+            }
+            var tmp = [];
+            tmp.push(lookup["Ganze Pflanze"]);
+            tmp.push(lookup["Blatt"]);
+            tmp.push(lookup["Blüte"]);
+            // set it
+            $scope.menuData = tmp;
+        });
+
+        $scope.getImageName = function(data) {
+                if (data.imageName == undefined) {
+                    data.imageName = $scope.replaceAllSpecialCharactersInString(data.name);
+                }
+                return data.imageName;
+            }
+            // Selection logic
+        $scope.menuSelectItem = function(child, parent, grandparent) {
+            child.selected = !child.selected;
+            if (child.selected) { // add
+                // disable previous one if same category
+                if ($scope.selectedMerkmale[parent.name]) {
+                    $scope.selectedMerkmale[parent.name].selected = false;
+                    addRemove("remove", grandparent.name, $scope.selectedMerkmale[parent.name]);
+                }
+                // add to merkmale (for results)
+                if (!child.grandparent) child.grandparent = grandparent.name;
+                $scope.selectedMerkmale[parent.name] = child;
+
+                // Change color
+                if (parent.name == "Farbe") {
+                    changeColorOfBlueteTo(child.name);
+                } else {
+                    // add to vorschau
+                    addRemove("add", grandparent.name, child);
+                }
+
+                // change image to child image
+                parent.imageName = $scope.getImageName(child);
+                // invert image
+                //invertMenuItem("#menuImg-"+$scope.replaceAllSpecialCharactersInString(parent.name));
+                // select
+                parent.selected = true;
+
+
+            } else { // remove
+                // remove stuff
+                delete $scope.selectedMerkmale[parent.name];
+                addRemove("remove", grandparent.name, child);
+                parent.selected = false;
+
+                // change color back to white
+                if (parent.name == "Farbe") {
+                    changeColorOfBlueteTo("weiß");
+                }
+
+                // change image back
+                parent.imageName = $scope.replaceAllSpecialCharactersInString(parent.name);
+            }
+
+            updateResults();
+        };
+
+        // Change color to 
+        function changeColorOfBlueteTo(color) {
+                Caman("#vorschau-bild-mitte", function() {
+                    if (color == "blau") {
+                        this.colorize("#0000FF", 100).render();
+                    } else if (color == "weiß") {
+                        this.colorize("#FFFFFF", 100).render();
+                    } else if (color == "gelb") {
+                        this.colorize("#FFE4B5", 100).render();
+                    } else if (color == "rosa") {
+                        this.colorize("#FFC0CB", 100).render();
+                    } else if (color == "violett") {
+                        this.colorize("#8A2BE2", 100).render();
+                    } else { // Weiß
+                        this.colorize("#FFFFFF", 100).render();
+                    }
+                });
+            }
+            // Change color of supermenu
+        function invertMenuItem(imageId) {
+            //console.log(imageId);
+            Caman(imageId, function() {
+                this.invert().render();
+            });
+        }
+
+        // repace all special characters in string
+        $scope.replaceAllSpecialCharactersInString = function(string) {
+            //console.log(string.replace(/[^a-zA-Z]+/, ''))
+            if (string == undefined) return "undefined";
+            return string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '');
+        }
+
+        function updateResults() { // TODO make performant, should not calculate everything again every time
+            if (Object.keys($scope.selectedMerkmale).length == 0) { // Keine selection, alle zeigen
+                $scope.result
+                s = $scope.plants;
+                $scope.updateNumbers();
+                return;
+            }
+
+            // Get all plantids with weight
+            var allIdsWithWeight = {};
+
+            for (var key in $scope.selectedMerkmale) { // Mache liste mit allen plants und ihren summierten punkten
+                var merkmal = $scope.selectedMerkmale[key];
+                var arrayLength = merkmal.plantIds.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (!allIdsWithWeight[merkmal.plantIds[i]]) allIdsWithWeight[merkmal.plantIds[i]] = 0;
+                    allIdsWithWeight[merkmal.plantIds[i]]++;
+                }
+            }
+
+            // make results
+            var results = [];
+
+            for (var property in allIdsWithWeight) { // über alle gewichteten pflanzen
+                if (allIdsWithWeight.hasOwnProperty(property)) { // sonst checkt der alle (auch superklassen kram)
+                    var plant = plantIdsLookup[property];
+                    results.push(plant);
+                }
+            }
+            // Sort by weight
+            results.sort(function(a, b) { // UNTESTED
+                return allIdsWithWeight[b.SampleID] - allIdsWithWeight[a.SampleID];
+            });
+
+            $scope.results = results;
+            $scope.updateNumbers();
+
+        }
+
+        function addRemove(type, name, object) {
+            if (type == "add") {
+                if (name == "Ganze Pflanze") {
+                    $scope.vorschauLebensform.push(object);
+                } else if (name == "Blüte") {
+                    $scope.vorschauBluete.push(object);
+                } else if (name == "Kopf") {
+                    $scope.vorschauKopf.push(object);
+                } else if (name == "Blatt") {
+                    $scope.vorschauBlatt.push(object);
+                }
+            } else { // remove
+                if (name == "Ganze Pflanze") {
+                    remove($scope.vorschauLebensform, object);
+                } else if (name == "Blüte") {
+                    remove($scope.vorschauBluete, object);
+                } else if (name == "Kopf") {
+                    remove($scope.vorschauKopf, object);
+                } else if (name == "Blatt") {
+                    remove($scope.vorschauBlatt, object);
+                }
+
+            }
+
+        };
+
+        function remove(arr, item) {
+            for (var i = arr.length; i--;) {
+                if (arr[i] === item) {
+                    arr.splice(i, 1);
+
+                }
+            }
+        }
+
+        function searchPlant(name) {
+            var result = -1;
+            var results = new Array([0]);
+            for (plant in $scope.plants) {
+                result = plant.ScientificName.search(name);
+                if (result > -1) {
+                    results = results.concat(results, new Array([plant]));
+                } else {
+                    result = plant.descriptionText.search(name);
+                    if (result > -1) {
+                        results = results.concat(results, new Array([plant]));
+                    } else {
+                        result = plant.t_subclass.search(name);
+                        if (result > -1) {
+                            results = results.concat(results, new Array([plant]));
+                        } else {
+                            result = plant.t_superorder.search(name);
+                            if (result > -1) {
+                                results = results.concat(results, new Array([plant]));
+                            } else {
+                                result = plant.t_order.search(name);
+                                if (result > -1) {
+                                    results = results.concat(results, new Array([plant]));
+                                } else {
+                                    result = plant.t_family.search(name);
+                                    if (result > -1) {
+                                        results = results.concat(results, new Array([plant]));
+                                    } else {
+                                        result = plant.t_genus.search(name);
+                                        if (result > -1) {
+                                            results = results.concat(results, new Array([plant]));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return results;
+        }
+
+        function searchTrait(trait) {
+            var result = -1;
+            var results = new Array([0]);
+            for (plant in $scope.plants) {
+                //Zugriff auf Merkmale von Pflanzen?
+                if (plant.merkmale.search(trait) != -1) {
+                    results = results.concat(results, new Array([plant]));
+                }
+            }
+        }
+		
+		$scope.getRandomPlant = function() {
+			var len = $scope.plants.length;
+			var randNr = Math.floor((Math.random() * len));
+			var randPlant = $scope.plants[randNr];
+			console.log(new String("Getting random plant: $scope.plants[") + randNr + new String("]: ") + randPlant.ScientificName);
+		}
+		
+		$scope.putPlantIntoHerbarium = function(plant) {
+			console.log("Saving plant " + plant + " to my herbarium");
+			$scope.herbarium = $scope.herbarium.concat($scope.herbarium, new Array([plant]));
+			PlantStorage.saveToHerbarium(plant);
+		}
+
+        // Popover
+        $ionicPopover.fromTemplateUrl('my-popover.html', {
+            scope: $scope
+        }).then(function(popover) {
+            $scope.popover = popover;
+        });
+
+        $scope.showMenuPopover = function($event, data, superMenuData) {
+            $scope.currentPopoverMenuItem = data;
+            data.hightlighted = true;
+            $scope.currentPopoverMenuSuperItem = superMenuData;
+            $scope.popover.show($event);
+        };
+
+        $scope.closePopover = function() {
+            $scope.popover.hide();
+        };
+
+        //Cleanup the popover when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.popover.remove();
+        });
+        $scope.$on('popover.hidden', function() {
+            $scope.currentPopoverMenuItem.hightlighted = false;
+        });
+        $scope.$on('popover.removed', function() {
+            // Execute action
+        });
+
+
+        // Results View
+        $scope.padding = 5;
+
+        var jumps = [0, 5, 20, 60] // Die sprünge 
+        $scope.updateNumbers = function() {
+            $scope.countOfResults = $scope.results.length;
+            if ($scope.countOfResults >= jumps[0] && $scope.countOfResults < jumps[1]) {
+                $scope.resultsScaleTo(200);
+            } else if ($scope.countOfResults >= jumps[1] && $scope.countOfResults < jumps[2]) {
+                $scope.resultsScaleTo(100);
+            } else if ($scope.countOfResults >= jumps[2] && $scope.countOfResults < jumps[3]) {
+                $scope.resultsScaleTo(50);
+            } else {
+                $scope.resultsScaleTo(25);
+            }
+        }
+
+        $scope.resultsScaleTo = function(scale) {
+            $scope.resultSettings.size = scale;
+            $ionicScrollDelegate.$getByHandle("resultsScrollView").resize();
+            // http://ionicframework.com/docs/api/service/$ionicScrollDelegate/
+        }
+
+        // Modal image view
+        $ionicModal.fromTemplateUrl('image-modal.html', {
+            id: '1',
+            scope: $scope,
+            animation: 'slide-in-right',
+            backdropClickToClose: false
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+
+        // Modal floradex image
+        $ionicModal.fromTemplateUrl('flodarex-intro.html', {
+            id: '2',
+            scope: $scope,
+            backdropClickToClose: false
+        }).then(function(modal) {
+            $scope.modalFloradexImage = modal;
+
+            if (showModalViewsOnStartup) {
+                $scope.modalFloradexImage.show();
+                $scope.toggleDrawer();
+            }
+
+        });
+
+        $scope.hideFloradexOverlay = function(plant) {
+            $scope.modalFloradexImage.hide();
+        }
+
+        $scope.openModal = function() {
+            //$scope.modalFloradexImage.show();
+            $scope.modal.show();
+        };
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+            $scope.modalFloradexImage.remove();
+        });
+
+        // Check if shown
+        var modalShown = false;
+        $scope.$on('modal.hidden', function() {
+            modalShown = false;
+        });
+        $scope.$on('modal.shown', function() {
+            modalShown = true;
+        });
+
+
+
+        $scope.showImage = function(plant) {
+            $scope.currentMoreInfoPlant = plant;
+            if ($scope.currentMoreInfoPlant.associatedMedia != "" && !modalShown) {
+                $scope.openModal();
+            }
+
+        }
+    })
+	
+    .directive('errSrc', function() { // change image source on error
+        return {
+            link: function(scope, element, attrs) {
+                element.bind('error', function() {
+                    if (attrs.src != attrs.errSrc) {
+                        attrs.$set('src', attrs.errSrc);
+                    }
+                });
+            }
+        }
+    })
+;

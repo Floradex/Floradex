@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 333.51999 671.56"
+   height="671.56"
+   width="333.51999"
+   xml:space="preserve"
+   version="1.1"
+   id="svg2"><metadata
+     id="metadata8"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+     id="defs6"><clipPath
+       id="clipPath18"
+       clipPathUnits="userSpaceOnUse"><path
+         id="path20"
+         d="m 0,0 2501,0 0,5036.67 -2501,0 L 0,0 Z" /></clipPath></defs><g
+     transform="matrix(1.3333333,0,0,-1.3333333,0,671.56)"
+     id="g10"><g
+       transform="scale(0.1)"
+       id="g12"><g
+         id="g14"><g
+           clip-path="url(#clipPath18)"
+           id="g16"><path
+             id="path22"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 1241.86,0 0,0 -116.58,16.2305 8.12,58.1406 c 25.53,183.7109 48.99,441.1879 56.23,787.5199 0,0 -534.767,426.309 -847.872,1011.679 C 2.5,2507.65 0,3167.58 0,3167.58 c 0,0 547.598,-368.24 886.836,-1002.41 127.934,-238.79 229.164,-469.86 297.914,-669.51 -7.07,216.33 -19.92,455.37 -40.14,719.08 -39.25,511.12 -92.36,929.01 -114.36,1091.73 -5.4,-0.13 -10.76,-0.19 -16.14,-0.19 -345.508,0 -638.067,262.99 -672.067,614.33 -8.254,84.76 -95.473,985.8 -95.473,985.8 l 475.43,-371 196.398,436.3 277.862,-390.41 395.91,455.36 c 0,0 87.2,-900.99 95.47,-985.72 33.93,-350.94 -202.01,-665.02 -540.51,-731.82 22.58,-166.67 75.55,-585.14 114.65,-1095.37 17.42,-227.43 33.34,-490.96 41.62,-767.35 68.46,208.2 174.69,454.04 311.04,708.77 339.24,634.17 886.99,1002.33 886.99,1002.33 0,0 -2.52,-659.93 -341.76,-1294.09 C 1843.6,1282.89 1307.23,862.051 1307.23,862.051 1301.62,583.449 1284.5,308.262 1249.82,58.1406 L 1241.86,0" /></g></g></g></g></svg>

@@ -1,0 +1,335 @@
+Cichorium intybus L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: gefiedert
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: gezähnt
+			BLATT: gesägt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: blau
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
+
+Carduus nutans L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: gerillt
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: gekerbt
+			BLATT: gelappt
+		Kategorie: Blattnerven
+			BLATT: in den Blattrand auslaufend
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: rosa
+		Kategorie: Blütenorientierung
+			BLUETE: nickend
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+			BLUETE: röhrenförmig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
+
+Daucus carota L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: gerillt
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: doppelt gefiedert
+			BLATT: dreifach gefiedert
+		Kategorie: Blattform
+			BLATT: lanzettlich
+			BLATT: lineal
+		Kategorie: Blattrand
+			BLATT: gelappt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: Dolde
+
+Dianthus carthusianorum L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: scheidig verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lineal
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: violett
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: Köpfchen
+
+Helichrysum arenarium (L.) Moench
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Blattgrund
+			LEBENSFORM: stengelumfassend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: oval
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+			BLUETE: röhrenförmig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
+			BLUETE: Dolde
+
+Ranunculus acris L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: dreizählig
+			BLATT: handförmig gespalten
+		Kategorie: Blattrand
+			BLATT: gebuchtet
+		Kategorie: Blattnerven
+			BLATT: kreuz-geadert
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: Traube
+			BLUETE: Rispe
+
+Dianthus deltoides L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: scheidig verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: violett
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: einzeln
+			BLUETE: Rispe
+			
+Eupatorium cannabinum L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: handförmig getrennt
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: gezähnt
+			BLATT: gelappt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: rosa
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: röhrenförmig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
+			BLUETE: Dolde
+			BLUETE: Rispe
+			
+
+Echium vulgare L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+	Kategorie: Blatt
+		Kategorie: Blattform
+			BLATT: lanzettlich
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: rosa
+			BLUETE: violett
+			BLUETE: blau
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: trichterförmig
+		Kategorie: Anordnung
+			BLUETE: Wickel
+
+Quercus robur L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Baum
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: oval
+		Kategorie: Blattrand
+			BLATT: gebuchtet
+		Kategorie: Blattnerven
+			BLATT: in den Blattrand auslaufend
+
+Centaurea scabiosa L. subsp. scabiosa
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+			BLATT: gefiedert
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: gebuchtet
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: violett
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: Köpfchen
+
+Armeria maritima subsp. elongata (Hoffm.) Bonnier
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rund
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: grundständig
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lineal
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: rosa
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: trichterförmig
+		Kategorie: Anordnung
+			BLUETE: Köpfchen
