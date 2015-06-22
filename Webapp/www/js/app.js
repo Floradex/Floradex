@@ -191,9 +191,9 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
 
         // repace all special characters in string
         $scope.replaceAllSpecialCharactersInString = function(string) {
-            //console.log(string.replace(/[^a-zA-Z]+/, ''))
+            //console.log(string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '').replace(/[äÄöÖüÜ]/g, ''));
             if (string == undefined) return "undefined";
-            return string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '');
+            return string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '').replace(/[äÄöÖüÜ]/g, '');
         }
 
         function updateResults() { // TODO make performant, should not calculate everything again every time
@@ -328,6 +328,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
 			var randNr = Math.floor((Math.random() * len));
 			var randPlant = $scope.plants[randNr];
 			console.log(new String("Getting random plant: $scope.plants[") + randNr + new String("]: ") + randPlant.ScientificName);
+			return randPlant;
 		}
 		
 		$scope.putPlantIntoHerbarium = function(plant) {
