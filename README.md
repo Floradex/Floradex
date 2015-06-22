@@ -8,11 +8,13 @@ Fachbegriffe und den trockenen wissenschaftlichen Inhalt binden wir direkt in di
 
 LIZENZ
 
-Für den Quellcode dieses Projekts gilt die GNU General Public Licence
+Für den Quellcode dieses Projekts gilt die GNU General Public Licence 2.0
+
 Diese kann hier nachgelesen werden http://choosealicense.com/licenses/gpl-2.0/
 
 Für die Bilder dieses Projekts, die bei Veröffentlichung unter keiner Lizenz standen, gilt die Creative Commons Lizenz CC BY-NC-SA
-- Namensnennung - Weitergabe unter gleichen Bedingungen
+
+- Namensnennung - keine kommerzielle Nutzung - Weitergabe unter gleichen Bedingungen
 - Einsehbar ist die Lizenz hier https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 - Als Kurzfassung hier https://creativecommons.org/licenses/by-nc-sa/4.0/
 
