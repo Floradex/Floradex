@@ -7,12 +7,13 @@ Wir haben deshalb eine App konzipiert und programmiert, die es dem Benutzer unte
 Fachbegriffe und den trockenen wissenschaftlichen Inhalt binden wir direkt in die spielerischen Elemente ein. Deshalb hat floradex das Potenzial, als Lehrmittel in der Schule eingesetzt zu werden. Projektarbeit mit selbstbestimmtem Lernen durch Anfassen und Ausprobieren ist eine gute Alternative zum klassischen Frontalunterricht und sturem Auswendiglernen. So kann auch Interesse für Themen geweckt werden, die Jugendliche vielleicht zunächst ablehnen.  Aber auch für interessierte Laien bietet floradex leichten Zugang zur Botanik. Durch die Optimierung für mobile Geräte können Pflanzen beim Spaziergang, beim Besuch im Botanischen Garten oder im heimischen Garten ohne Eingriff in die Natur bestimmt werden.
 
 LIZENZ
+
 Für den Quellcode dieses Projekts gilt die GNU General Public Licence
 Diese kann hier nachgelesen werden http://choosealicense.com/licenses/gpl-2.0/
 
-Für die Bilder dieses Projekts, die bei Veröffentlichung unter keiner Lizenz standen, gilt die Creative Commons Lizenz CC BY-SA
+Für die Bilder dieses Projekts, die bei Veröffentlichung unter keiner Lizenz standen, gilt die Creative Commons Lizenz CC BY-NC-SA
 - Namensnennung - Weitergabe unter gleichen Bedingungen
-- Einsehbar ist die Lizenz hier https://creativecommons.org/licenses/by-sa/4.0/legalcode
-- Als Kurzfassung hier https://creativecommons.org/licenses/by-sa/4.0/
+- Einsehbar ist die Lizenz hier https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+- Als Kurzfassung hier https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 Alle weiteren Inhalte (Quellcode, Bilder, Bibliotheken, Binaries usw.) behalten ihre jeweilige Lizenz. Die entsprechenden Lizenzen sind diesem Projekt beigefügt.
