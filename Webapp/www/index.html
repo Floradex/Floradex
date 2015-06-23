@@ -14,6 +14,10 @@
     <script src="cordova.js"></script>
     <script src="js/app.js"></script>
     <script src="lib/ionic-ion-drawer/ionic.contrib.drawer.js"></script>
+    <script src='/lib/lodash/lodash.min.js'></script>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src='/lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
+
 </head>
 
 <body ng-app="floradex" ng-controller="MainCtrl">
@@ -56,17 +60,17 @@
 
                 -->
                 <script id="my-popover.html" type="text/ng-template">
-                    <ion-popover-view class="floracolor-yellow" style="height: 150px;
+                    <ion-popover-view class="floracolor-yellow" style="height: 160px;
                                                                       width: {{(currentPopoverMenuItem.children.length * 75) + 'px' }};">
                         <ion-header-bar class="popover-header floracolor-yellow bar-top-no-border ">
                             <div class="title">{{currentPopoverMenuItem.name}}</div>
                         </ion-header-bar>
                         <ion-content>
                             <ion-scroll direction="y" class="popover-scroller">
-                                <div ng-class="(child.selected == true) ? 'popover-photo photo-selected' : 'popover-photo popover-photo-hoverble'" collection-repeat="child in currentPopoverMenuItem.children" item-height="75" item-width="75" ng-click="menuSelectItem(child, currentPopoverMenuItem, currentPopoverMenuSuperItem)">
+                                <div ng-class="(child.selected == true) ? 'popover-photo photo-selected' : 'popover-photo popover-photo-hoverble'" collection-repeat="child in currentPopoverMenuItem.children" item-height="140" item-width="75" ng-click="menuSelectItem(child, currentPopoverMenuItem, currentPopoverMenuSuperItem)">
                                     <img class="second-row-image" ng-src="resources/images/menu/{{replaceAllSpecialCharactersInString(child.name)}}.png">
-                                    <!--br>
-                                     <div style="position:fixed; bottom:0; left:0; width:100%; font-align:center;font-size:10px;"> {{child.name}}</div> titel unten-->
+                                    <br>
+                                    <div class="second-row-text"> {{child.name}}</div>
                                 </div>
                             </ion-scroll>
                         </ion-content>
@@ -130,38 +134,48 @@
                 <ion-header-bar class="bar-top-no-border floracolor-yellow">
                     <h1 class="title">{{currentMoreInfoPlant.ScientificName}}</h1>
                     <div class="buttons">
-                        <button ng-if="!herbariumContains(currentMoreInfoPlant)" class="button button-clear button-balanced icon ion-ios-star-outline button-large" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)"></button> 
-                        <button ng-if="herbariumContains(currentMoreInfoPlant)" class="button button-clear button-balanced icon ion-ios-star button-large" ng-click=""></button> 
-                        <!--  -->
-                        <button class="button button-clear button-assertive icon ion-ios-close-outline button-large" ng-click="closeModal()"></button>
+                        <button class="button button-clear icon ion-android-print button-large" ng-click="" />
+                        <button ng-if="!moreInfosSettings.isInHerbarium" class="button button-clear icon ion-ios-star-outline button-large" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)" />
+                        <button ng-if="moreInfosSettings.isInHerbarium" class="button button-clear icon ion-ios-star button-large" ng-click="" />
+                        <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="closeModal()" />
                     </div>
                 </ion-header-bar>
                 <ion-content class="floracolor-yellow more-infos">
                     <div class="row">
-                        <div class="col mi-col-upper">
-                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
+                        <div class="col">
+                             <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                             </ui-gmap-google-map>
                         </div>
                         <div class="col mi-col-upper">
-                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
+                             <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" ng-click="openFullscreenModal()" />
                         </div>
                         <div class="col mi-col-upper">
                             <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
                         </div>
                     </div>
-                    <h3>Botanische Einordnung</h3>
-                    <div>
-                        Subklasse: {{currentMoreInfoPlant.t_subclass}}
-                        <br> Ordnung: {{currentMoreInfoPlant.t_order}}
-                        <br> Unterordnung: {{currentMoreInfoPlant.t_superorder}}
-                        <br> Familie: {{currentMoreInfoPlant.t_family}}
-                        <br> Gattung: {{currentMoreInfoPlant.t_genus}}
-                        <br> Standort: {{currentMoreInfoPlant.HigherGeography}}
-                    </div>
-                    <h3>Beschreibung</h3>
-                    <div>
-                        {{currentMoreInfoPlant.descriptionText}}
-                        <br> Quelle: <a href="https://de.wikipedia.org">Wikipedia</a>
-                        <br>
+                    <div class="row">
+                        <div class="col mi-col-lower">
+                            <h3>Botanische Einordnung</h3>
+                            <div>
+                                Subklasse: {{currentMoreInfoPlant.t_subclass}}
+                                <br> Ordnung: {{currentMoreInfoPlant.t_order}}
+                                <br> Unterordnung: {{currentMoreInfoPlant.t_superorder}}
+                                <br> Familie: {{currentMoreInfoPlant.t_family}}
+                                <br> Gattung: {{currentMoreInfoPlant.t_genus}}
+                                <br> Standort: {{currentMoreInfoPlant.HigherGeography}}
+                            </div>
+                        </div>
+                        <div class="col mi-col-lower">
+                            <h3>Beschreibung</h3>
+                            <div>
+                                {{currentMoreInfoPlant.descriptionText}}
+                                <br> Quelle: <a href="https://de.wikipedia.org">Wikipedia</a>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col mi-col-lower">
+
+                        </div>
                     </div>
                 </ion-content>
             </ion-modal-view>
@@ -169,7 +183,7 @@
         <!-- 
 
 
-        MODAL VIEW START SCREEN 
+         START SCREEN MODAL VIEW
 
 
         -->
@@ -200,6 +214,25 @@
                 <!-- <button class=" icon ion-close-round" ng-click="closeDrawer();modalFloradexImage.hide();"></button> -->
             </ion-content>
         </drawer>
+        <!-- 
+
+
+         FULL SCREEN IMAGE MODAL VIEW
+
+
+        -->
+        <script id="image-fullscreen.html" type="text/ng-template">
+            <ion-modal-view style="width: calc(100% - 250px) !important; height: 100%; top: 0%; left: 0%; right: 250px; bottom: 0%;">
+                <ion-content class="floracolor-main" ng-click="hideFloradexOverlay();">
+                    <ion-scroll zooming="true" direction="xy" scrollbar-x="true" scrollbar-y="true" delegate-handle="fullscreenScrollview" class="ion-scroll-height-fix" min-zoom="0.3">
+                        <img ng-src="{{currentMoreInfoPlant.associatedMedia}}" ng-click="hideFullscreenImageOverlay()">
+                    </ion-scroll>
+                    <div class="fullscreen-image-text-bubble">
+                        Bild antippen um zu schließen
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
 </body>
 
 </html>

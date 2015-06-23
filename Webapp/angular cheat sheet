@@ -1,0 +1,19 @@
+ ng-src
+
+<img ng-src="http://www.gravatar.com/avatar/{{hash}}" alt="Description" />
+
+
+ionic buttons
+
+<button class="button icon-left ion-star button-positive">Favorites</button>
+<a class="button icon-right ion-chevron-right button-calm">Learn More</a>
+<a class="button icon-left ion-chevron-left button-clear button-dark">Back</a>
+<button class="button icon ion-gear-a"></button>
+<a class="button button-icon icon ion-settings"></a>
+<a class="button button-outline icon-right ion-navicon button-balanced">Reorder</a>
+
+css
+
+rounded corners
+
+  border-radius: 25px;

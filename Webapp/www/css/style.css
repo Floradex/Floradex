@@ -124,7 +124,7 @@ html * {
 }*/
 
 .vorschau-item-large {
-    position:absolute;
+    position: absolute;
     top: 0px;
     left: 0px;
     max-width: 90%;
@@ -172,7 +172,7 @@ html * {
 }
 
 .popover-photo {
-    display: flex;
+    float: left;
     align-items: center;
     justify-content: center;
     padding: 5px;
@@ -186,6 +186,14 @@ html * {
 
 .photo-selected {
     background-color: #D4B349;
+}
+
+.second-row-text {
+    float: left;
+    height: 57px;
+    width: 100%;
+    font-align: center;
+    font-size: 10px;
 }
 /*.popover-backdrop.active{
   background:none !important;
@@ -218,16 +226,16 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     text-align: center;
     font-size: 20px;
     color: white;
-    
     left: 20%;
     margin: 0 auto;
     width: 150px;
     /*margin-left: 5px;*/
+    
     bottom: 3.5em;
 }
 
 .flora-menu .submenu {
-    position:relative;
+    position: relative;
     /*border-top: solid;
     border-top-width: 1.3em;*/
     /*border-right: solid;
@@ -291,33 +299,6 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     height: 57px;
     width: 57px;
 }
-/* 
-    Modal Image
-*/
-
-.transparent {
-    background: transparent !important;
-}
-
-.image-modal {
-    width: 100% !important;
-    height: 100% !important;
-    top: 0 !important;
-    left: 0 !important;
-    bottom: 0;
-}
-
-.fullscreen-image {
-    max-width: 100%;
-    max-height: 100%;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    overflow: auto;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
 /* SLide in animation
 */
 
@@ -348,7 +329,7 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 .result-plant-name {
     position: fixed;
     bottom: 0;
-    left:0;
+    left: 0;
     font-size: 10px;
     background-color: white;
 }
@@ -389,7 +370,7 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 }
 
 .photo-sidebar-selected-bg {
-    background-color:  #F7D031;
+    background-color: #F7D031;
 }
 
 .photo:hover {
@@ -411,6 +392,12 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     border-width: 1px;
     margin-left: 15px;
     height: 600px;
+}
+
+.ion-scroll-height-fix {
+    padding: 0.5em;
+    height: 700px;
+    width: 100%;
 }
 
 .sidebar-has-footer {
@@ -450,10 +437,8 @@ Modal Overlay more info view tecnical stuff
 */
 
 .button-large,
-.button-large .icon:before{
-  /*font-size: 9000px !important;
-  max-width: 9000px !important;
-  max-height:9000px !important;*/
+.button-large .icon:before {
+    color: white !important;
 }
 
 .modal-backdrop-bg {
@@ -472,15 +457,11 @@ Modal Overlay more info view tecnical stuff
 .modal-open.loading-active .modal-backdrop {
     pointer-events: auto;
 }
-
-
 /*
   Mehr Infos view
 */
 
-.more-infos {
-
-}
+.more-infos {}
 
 .more-infos .image {
     padding: 5px;
@@ -489,6 +470,28 @@ Modal Overlay more info view tecnical stuff
     margin-right: auto;
 }
 
-.more-infos .mi-col-upper {
+.more-infos .mi-col-upper:hover {
+    cursor: pointer;
+    cursor: hand;
+    background-color: #E2CC8B;
+}
 
+.more-infos .mi-col-lower {}
+
+.fullscreen-image-text-bubble {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.angular-google-map-container {
+    height: 200px;
+    width: 200px;
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
