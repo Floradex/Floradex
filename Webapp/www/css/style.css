@@ -124,15 +124,18 @@ html * {
 }*/
 
 .vorschau-item-large {
-    display: block;
-    margin: auto;
-    /* bring your own prefixes */
-    
+    position:absolute;
+    top: 0px;
+    left: 0px;
     max-width: 90%;
     padding-top: 15%;
 }
 
-.vorschau-div {}
+.vorschau-div {
+    position: relative;
+    display: block;
+    margin: auto;
+}
 /* 
         Modal floradex image 
 */
@@ -211,13 +214,20 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 */
 
 .flora-menu .superMenuName {
-    text-align: left;
+    position: absolute;
+    text-align: center;
     font-size: 20px;
     color: white;
+    
+    left: 20%;
+    margin: 0 auto;
+    width: 150px;
     /*margin-left: 5px;*/
+    bottom: 3.5em;
 }
 
 .flora-menu .submenu {
+    position:relative;
     /*border-top: solid;
     border-top-width: 1.3em;*/
     /*border-right: solid;
@@ -260,10 +270,11 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 }
 
 .flora-menu {
-    height: 105px;
+    height: 75px;
     position: fixed;
     bottom: 0em;
     width: calc(100% - 250px);
+    z-index: 150;
     /*border-top: solid;
   border-width: 1.5em;*/
     /*border-color: #6D6A5B;*/
@@ -334,6 +345,14 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 }
 /*SIdebar*/
 
+.result-plant-name {
+    position: fixed;
+    bottom: 0;
+    left:0;
+    font-size: 10px;
+    background-color: white;
+}
+
 .no-style-list {
     background-color: #2A292E;
     color: white;
@@ -367,6 +386,10 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     padding: 5px;
     cursor: pointer;
     cursor: hand;
+}
+
+.photo-sidebar-selected-bg {
+    background-color:  #F7D031;
 }
 
 .photo:hover {
@@ -416,13 +439,21 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     text-align: center;
     /*font-weight: bold;*/
 }
-/* Modal Overlay more info view */
+/* 
+
+
+
+Modal Overlay more info view tecnical stuff
+
+
+
+*/
 
 .button-large,
 .button-large .icon:before{
-  font-size: 9000px !important;
+  /*font-size: 9000px !important;
   max-width: 9000px !important;
-  max-height:9000px !important;
+  max-height:9000px !important;*/
 }
 
 .modal-backdrop-bg {
@@ -440,4 +471,24 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 .modal-open.loading-active .modal,
 .modal-open.loading-active .modal-backdrop {
     pointer-events: auto;
+}
+
+
+/*
+  Mehr Infos view
+*/
+
+.more-infos {
+
+}
+
+.more-infos .image {
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.more-infos .mi-col-upper {
+
 }

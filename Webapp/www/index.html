@@ -31,22 +31,21 @@
                 <div class="row">
                     <div class="col vorschau-div color-col-0">
                         <div ng-repeat="attribute in vorschauLebensform">
-                            {{attribute.name + ".png"}}
+                            <img src="resources/images/default/empty_ganz.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
                         </div>
-                        <img src="resources/images/default/empty_ganz.png" class="vorschau-item-large">
+                        <img src="resources/images/default/empty_ganz.png" class="vorschau-item-large" style="z-index= 1;">
                     </div>
-                    
                     <div class="col vorschau-div color-col-2">
                         <div ng-repeat="attribute in vorschauBlatt">
-                            {{attribute.name + ".png"}}
+                            <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
                         </div>
-                        <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" style="padding:1.5em;">
+                        <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" style="padding:1.5em; z-index=1;">
                     </div>
                     <div class="col vorschau-div color-col-1">
                         <div ng-repeat="attribute in vorschauBluete">
-                            {{attribute.name + ".png"}}
+                            <img src="resources/images/default/empty_bluete.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
                         </div>
-                        <img id="vorschau-bild-mitte" src="resources/images/default/empty_bluete.png" class="vorschau-item-large">
+                        <img id="vorschau-bild-mitte" src="resources/images/default/empty_bluete.png" class="vorschau-item-large" style="z-index= 1;">
                     </div>
                 </div>
                 <!-- 
@@ -105,15 +104,18 @@
         <ion-side-menu side="right">
             <ion-content class="floracolor-ironsight-grey sidebar-has-footer">
                 <ion-scroll delegate-handle="resultsScrollView" direction="y" class="result-scroller center" ng-style="">
-                    <div class="photo" collection-repeat="plant in results" item-height="resultSettings.size + padding" item-width="resultSettings.size + padding">
-                        <img ng-src="resources/images/thumbnails/{{plant.SampleID}}-{{resultSettings.size}}.png" err-src="resources//images/default/thumbnail-{{resultSettings.size}}.png" ng-click="showImage(plant) ">
+                    <div ng-class="(plant.isShownInModalView == true) ? 'photo photo-sidebar-selected-bg' : 'photo'" collection-repeat="plant in results" item-height="resultSettings.size + padding" item-width="resultSettings.size + padding">
+                        <img ng-src="resources/images/thumbnails/{{plant.SampleID}}-{{resultSettings.size}}.png" err-src="resources/images/default/thumbnail-{{resultSettings.size}}.png" ng-click="showImage(plant)">
+                        <div ng-if="resultMode == 'SearchResults'" class="result-plant-name"> {{plant.ScientificName | limitTo:20 }} </div>
                     </div>
                 </ion-scroll>
             </ion-content>
             <ion-footer-bar class="floradex-dark-grey bar-top-no-border sidebar-footer">
                 <button class="sidebar-above-header-button button button-clear icon ion-chevron-up" ng-click="toggleDrawer()"></button>
                 <br>
-                <div class="text">{{countOfResults}} Ergebnisse</div>
+                <div ng-if="resultMode == 'Baukasten'" class="text">{{countOfResults}} Ergebnisse</div>
+                <div ng-if="resultMode == 'MeinHerbarium'" class="text">Mein Herbarium</div>
+                <div ng-if="resultMode == 'SearchResults'" class="text">{{countOfResults}} Ergebnisse</div>
             </ion-footer-bar>
         </ion-side-menu>
         <!--
@@ -124,29 +126,28 @@
 
          -->
         <script id="image-modal.html" type="text/ng-template">
-            <ion-modal-view style="width: calc(100% - 250px) !important; height: calc(100% - 105px); top: 0%; left: 0%; right: 250px; bottom: 105px;">
+            <ion-modal-view style="width: calc(100% - 250px) !important; height: calc(100% - 75px); top: 0%; left: 0%; right: 250px; bottom: 75px;">
                 <ion-header-bar class="bar-top-no-border floracolor-yellow">
                     <h1 class="title">{{currentMoreInfoPlant.ScientificName}}</h1>
                     <div class="buttons">
+                        <button ng-if="!herbariumContains(currentMoreInfoPlant)" class="button button-clear button-balanced icon ion-ios-star-outline button-large" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)"></button> 
+                        <button ng-if="herbariumContains(currentMoreInfoPlant)" class="button button-clear button-balanced icon ion-ios-star button-large" ng-click=""></button> 
+                        <!--  -->
                         <button class="button button-clear button-assertive icon ion-ios-close-outline button-large" ng-click="closeModal()"></button>
                     </div>
                 </ion-header-bar>
-                <ion-content class="floracolor-yellow">
-                    <!--<div class="modal image-modal">
-                        <ion-pane>
-                            <img ng-src="{{currentMoreInfoPlant.associatedMedia}}" class="fullscreen-image" />
-                        </ion-pane>
-                    </div>-->
-                    <!--<div class="row responsive-md">
-                        <div class="col col-25">
-                            <img ng-src="{{currentMoreInfoPlant.associatedMedia}}" width="100%" />
+                <ion-content class="floracolor-yellow more-infos">
+                    <div class="row">
+                        <div class="col mi-col-upper">
+                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
                         </div>
-                    </div>-->
-                    <ion-slide-box style="height: 100%">
-                        <ion-slide><img ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" /></ion-slide>
-                        <ion-slide><img ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" /></ion-slide>
-                        <ion-slide><img ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" /></ion-slide>
-                    </ion-slide-box>
+                        <div class="col mi-col-upper">
+                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
+                        </div>
+                        <div class="col mi-col-upper">
+                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
+                        </div>
+                    </div>
                     <h3>Botanische Einordnung</h3>
                     <div>
                         Subklasse: {{currentMoreInfoPlant.t_subclass}}
@@ -158,9 +159,9 @@
                     </div>
                     <h3>Beschreibung</h3>
                     <div>
-                        {{currentMoreInfoPlant.descriptionText}}<br>
-                        Quelle: <a href="https://de.wikipedia.org">Wikipedia</a><br>
-						<button class="button" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)">Meinem Herbarium hinzufügen</button>
+                        {{currentMoreInfoPlant.descriptionText}}
+                        <br> Quelle: <a href="https://de.wikipedia.org">Wikipedia</a>
+                        <br>
                     </div>
                 </ion-content>
             </ion-modal-view>

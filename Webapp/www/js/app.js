@@ -15,65 +15,74 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
         }
     }
 })
-	
+
 //if cookies are disabled localStorage will not work and throw the error that the operation "is unsafe"
 .factory('PlantStorage', function() {
-	return { 
-		init: function() {
-			//backup to clear storage
-			//localStorage.clear();
-			console.log(new String("Trying to load plants from storage...") + "");
-			//var plantString = window.localStorage['plants'];
-			var plantString = window.localStorage.getItem('plants');
-			if (plantString) {
-				console.log(plantString.split(";"));
-				return plantString.split(";");
-			}
-			console.log(new String("no data in storage found") + "");
-			return [];
-		},
-		saveToHerbarium: function(plant) {
-			//var savedPlants = window.localStorage['plants'];
-			var savedPlants = window.localStorage.getItem('plants');
-			if (savedPlants) {
-				console.log(new String("Plants in own herbarium: ") + savedPlants);
-				console.log(new String("Adding plant ") + plant);
-				//window.localStorage['plants'] = angular.toJson(savedPlants + ";" + plant);
-				window.localStorage.setItem('plants', savedPlants + ";" + plant);
-			} else {
-				console.log(new String("Saving plant ") + plant + new String(" in empty storage"));
-				//window.localStorage['plants'] = angular.toJson(plant);
-				window.localStorage.setItem('plants', plant);
-			}
-		},
-		loadHerbarium: function() {
-			//var plants = window.localStorage['plants'].split(";");
+    return {
+        init: function() {
+            //backup to clear storage
+            //localStorage.clear();
+            //console.log(new String("Trying to load plants from storage...") + "");
+            var plantString = window.localStorage.getItem('plants');
+            if (plantString) {
+                console.log(plantString.split(";"));
+                return plantString.split(";");
+            }
+            //console.log(new String("no data in storage found") + "");
+            return [];
+        },
+        saveToHerbarium: function(plant) {
+            var savedPlants = window.localStorage.getItem('plants');
+            if (savedPlants) {
+                console.log(new String("Plants in own herbarium: ") + savedPlants);
+                console.log(new String("Adding plant ") + plant);
+                window.localStorage.setItem('plants', savedPlants + ";" + plant);
+            } else {
+                console.log(new String("Saving plant ") + plant + new String(" in empty storage"));
+                window.localStorage.setItem('plants', plant);
+            }
+        },
+        loadHerbarium: function() {
+            var plants = window.localStorage.getItem('plants').split(";");
+            if (plants) {
+                console.log(plants);
+                return plants;
+            } else {
+                return [];
+            }
+        },
+		removeFromHerbarium: function(plantID) {
 			var plants = window.localStorage.getItem('plants').split(";");
-			if (plants) {
-				console.log(plants);
-				return plants;
-			} else {
-				return [];
+			var indexOfPlant = plants.indexOf(plantID);
+			plants.splice(indexOfPlant, 1);
+			var temp = "";
+			for(plant in plants) {
+				temp += plant + ";";
 			}
+			window.localStorage.setItem('plants', temp);
 		}
-	}
+    }
 })
 
 .controller('MainCtrl', function($scope, $ionicScrollDelegate, $ionicPopover, $ionicModal, Plants, MenuData, PlantStorage) { // $ionicPopover,
         // debugging:
         var showModalViewsOnStartup = false;
+        // reset Herbarium
+        //window.localStorage.setItem('plants', "");
+
         // vars
         var plantIdsLookup = {};
-		//the saved plants from 'my herbarium', if plants were saved earlier
+        //the saved plants from 'my herbarium', if plants were saved earlier
         $scope.herbarium = PlantStorage.init();
 
         // results
         $scope.countOfResults = 0;
         $scope.results = null;
         $scope.resultSettings = {
-                size: 100
-            }
-            // Merkmale
+            size: 100
+        }
+        $scope.resultMode = "Baukasten"; // or "MeinHerbarium" or "SearchResults"
+        // Merkmale
         $scope.selectedMerkmale = {};
         // Vorschau
         $scope.vorschauLebensform = [];
@@ -97,10 +106,19 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
         });
 
         MenuData.all(function(menuData) { // Menu data json
-            // Sort it
+            // add random class
+            for (var i = menuData.length - 1; i >= 0; i--) {
+                var ebene1 = menuData[i];
+                for (var j = ebene1.children.length - 1; j >= 0; j--) {
+                    ebene1.children[j].children.push({ // Unspezifische klasse hinzufügen
+                        name: "fragezeichen"
+                    })
+                };
+            };
+            // Sort it and add random class
             var lookup = {};
             for (var i = 0, len = menuData.length; i < len; i++) {
-                lookup[menuData[i].name] = menuData[i];
+                lookup[menuData[i].name] = menuData[i]; // Make Lookup 
             }
             var tmp = [];
             tmp.push(lookup["Ganze Pflanze"]);
@@ -110,6 +128,16 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
             $scope.menuData = tmp;
         });
 
+        function contains(a, obj) {
+            var i = a.length;
+            while (i--) {
+                if (a[i] === obj) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         $scope.getImageName = function(data) {
                 if (data.imageName == undefined) {
                     data.imageName = $scope.replaceAllSpecialCharactersInString(data.name);
@@ -118,6 +146,21 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
             }
             // Selection logic
         $scope.menuSelectItem = function(child, parent, grandparent) {
+            if (child.name == "fragezeichen") { // Handle fragezeichen
+                child.selected = !child.selected;
+                // change image to child image
+                if (child.selected) {
+                    parent.imageName = $scope.getImageName(child);
+                    parent.selected = true;
+                } else {
+                    parent.selected = false;
+                    parent.imageName = $scope.replaceAllSpecialCharactersInString(parent.name);
+
+                }
+                updateResults();
+                return;
+            }
+
             child.selected = !child.selected;
             if (child.selected) { // add
                 // disable previous one if same category
@@ -198,8 +241,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
 
         function updateResults() { // TODO make performant, should not calculate everything again every time
             if (Object.keys($scope.selectedMerkmale).length == 0) { // Keine selection, alle zeigen
-                $scope.result
-                s = $scope.plants;
+                $scope.results = $scope.plants;
                 $scope.updateNumbers();
                 return;
             }
@@ -322,20 +364,28 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
                 }
             }
         }
-		
-		$scope.getRandomPlant = function() {
-			var len = $scope.plants.length;
-			var randNr = Math.floor((Math.random() * len));
-			var randPlant = $scope.plants[randNr];
-			console.log(new String("Getting random plant: $scope.plants[") + randNr + new String("]: ") + randPlant.ScientificName);
-			return randPlant;
-		}
-		
-		$scope.putPlantIntoHerbarium = function(plant) {
-			console.log("Saving plant " + plant + " to my herbarium");
-			$scope.herbarium = $scope.herbarium.concat($scope.herbarium, new Array([plant]));
-			PlantStorage.saveToHerbarium(plant);
-		}
+
+        $scope.getRandomPlant = function() {
+            var len = $scope.plants.length;
+            var randNr = Math.floor((Math.random() * len));
+            var randPlant = $scope.plants[randNr];
+            //console.log(new String("Getting random plant: $scope.plants[") + randNr + new String("]: ") + randPlant.ScientificName);
+            return randPlant;
+        }
+
+        // Herbarium
+        $scope.putPlantIntoHerbarium = function(plant) {
+            //console.log("Saving plant " + plant + " to my herbarium");
+            if (!$scope.herbariumContains(plant)) {
+                 $scope.herbarium = $scope.herbarium.concat($scope.herbarium,plant.SampleID);
+                 PlantStorage.saveToHerbarium(plant);
+            }
+        }
+
+        $scope.herbariumContains = function(plant) {
+            if($scope.currentMoreInfoPlant == undefined) return false;
+            return contains($scope.herbarium, plant.SampleID);
+        }
 
         // Popover
         $ionicPopover.fromTemplateUrl('my-popover.html', {
@@ -426,6 +476,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
 
         $scope.closeModal = function() {
             $scope.modal.hide();
+            $scope.currentMoreInfoPlant.isShownInModalView = false; // gelbe umrandung
         };
 
         //Cleanup the modal when we're done with it!
@@ -446,6 +497,8 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
 
 
         $scope.showImage = function(plant) {
+            if ($scope.currentMoreInfoPlant != undefined) $scope.currentMoreInfoPlant.isShownInModalView = false;
+            plant.isShownInModalView = true; // gelbe umrandung
             $scope.currentMoreInfoPlant = plant;
             if ($scope.currentMoreInfoPlant.associatedMedia != "" && !modalShown) {
                 $scope.openModal();
@@ -453,7 +506,6 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
 
         }
     })
-	
     .directive('errSrc', function() { // change image source on error
         return {
             link: function(scope, element, attrs) {
@@ -464,5 +516,4 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer'])
                 });
             }
         }
-    })
-;
+    });
