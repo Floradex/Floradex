@@ -6,6 +6,8 @@ Wir haben deshalb eine App konzipiert und programmiert, die es dem Benutzer unte
 
 Fachbegriffe und den trockenen wissenschaftlichen Inhalt binden wir direkt in die spielerischen Elemente ein. Deshalb hat floradex das Potenzial, als Lehrmittel in der Schule eingesetzt zu werden. Projektarbeit mit selbstbestimmtem Lernen durch Anfassen und Ausprobieren ist eine gute Alternative zum klassischen Frontalunterricht und sturem Auswendiglernen. So kann auch Interesse für Themen geweckt werden, die Jugendliche vielleicht zunächst ablehnen.  Aber auch für interessierte Laien bietet floradex leichten Zugang zur Botanik. Durch die Optimierung für mobile Geräte können Pflanzen beim Spaziergang, beim Besuch im Botanischen Garten oder im heimischen Garten ohne Eingriff in die Natur bestimmt werden.
 
+Die Webapp funktioniert am besten mit Chrome oder Safari bei einer Auflösung von mindestens 7,9"/20,1 cm Diagonale.
+
 LIZENZ
 
 Für den Quellcode dieses Projekts gilt die GNU General Public Licence 2.0
