@@ -110,7 +110,17 @@ public class Data {
 		String t_genus = this.information.get("genus");
 		String t_section = this.information.get("section");
 		//descriptions
-		String descriptionText = this.information.get("description");
+		String volksname = this.information.get("volksname");
+		String geo = this.information.get("geo");
+		String distribution = this.information.get("distribution");
+		String sun = this.information.get("sun");
+		String water = this.information.get("water");
+		String winter = this.information.get("winter");
+		String size = this.information.get("size");
+		String bloom = this.information.get("bloom");
+		String eatable = this.information.get("eatable");
+		String med = this.information.get("med");
+		
 		
 		Plant ret = new Plant(SampleID, title, description,
 				BasisOfRecord, InstitutionCode,
@@ -121,7 +131,8 @@ public class Data {
 				t_superorder, t_order, t_family,
 				t_subfamily, t_supertribe, t_tribe,
 				t_subtribe, t_genus, t_section,
-				descriptionText);
+				volksname, geo, distribution,
+				sun, water, winter, size, bloom, eatable, med);
 		//ret.print();
 		return ret;
 	}

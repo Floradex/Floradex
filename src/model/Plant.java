@@ -33,6 +33,16 @@ public class Plant {
 		private String t_section;
 		
 		private String descriptionText;
+		String volksname;
+		String geo;
+		String distribution;
+		String sun;
+		String water;
+		String winter;
+		String size;
+		String bloom;
+		String eatable;
+		String med;
 		
 		public Plant() {
 			// Empty plant
@@ -47,22 +57,23 @@ public class Plant {
 				String t_superorder, String t_order, String t_family,
 				String t_subfamily, String t_supertribe, String t_tribe,
 				String t_subtribe, String t_genus, String t_section,
-				String descriptionText) {
+				String volksname, String geo, String distribution,
+				String sun, String water, String winter, String size, String bloom, String eatable, String med) {
 			super();
-			SampleID = sampleID;
+			this.SampleID = sampleID;
 			this.title = title;
 			this.description = description;
-			BasisOfRecord = basisOfRecord;
-			InstitutionCode = institutionCode;
-			CollectionCode = collectionCode;
-			CatalogNumber = catalogNumber;
-			ScientificName = scientificName;
-			Family = family;
-			SpecificEpithet = specificEpithet;
-			HigherGeography = higherGeography;
-			Country = country;
-			Locality = locality;
-			Collector = collector;
+			this.BasisOfRecord = basisOfRecord;
+			this.InstitutionCode = institutionCode;
+			this.CollectionCode = collectionCode;
+			this.CatalogNumber = catalogNumber;
+			this.ScientificName = scientificName;
+			this.Family = family;
+			this.SpecificEpithet = specificEpithet;
+			this.HigherGeography = higherGeography;
+			this.Country = country;
+			this.Locality = locality;
+			this.Collector = collector;
 			this.associatedMedia = associatedMedia;
 			this.t_subclass = t_subclass;
 			this.t_superorder = t_superorder;
@@ -74,7 +85,16 @@ public class Plant {
 			this.t_subtribe = t_subtribe;
 			this.t_genus = t_genus;
 			this.t_section = t_section;
-			this.descriptionText = descriptionText;
+			this.volksname = volksname;
+			this.geo = geo;
+			this.distribution = distribution;
+			this.sun = sun;
+			this.water = water;
+			this.winter = winter;
+			this.size = size;
+			this.bloom = bloom;
+			this.eatable = eatable;
+			this.med = med;
 		}
 
 

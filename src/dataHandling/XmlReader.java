@@ -96,7 +96,7 @@ public class XmlReader{
 		iter = this.plants.iterator();
 		while(iter.hasNext()) {
 			String currentPlant = iter.next();
-			readContent("descriptions", "resources/paulsOrdner/" + this.datas.get(currentPlant).getSampleId() + "-desc.xml");
+			readContent("descriptions", "resources/Metadata/" + this.datas.get(currentPlant).getSampleId() + "-desc.xml");
 		}
 		
 		
@@ -226,13 +226,31 @@ public class XmlReader{
 					break;
 				case "descriptions":
 					String plantName = doc.getRootElement().getChild("name").getText();
-					String description = doc.getRootElement().getChild("description").getText();
-					//String description = this.makeUmlautsInHTMLDisplayable(doc.getRootElement().getChild("description").getText());
 					//System.out.println(plantName + ":\n" + description);
-					this.datas.get(plantName).addInformation("description", description);
+					String volksname = doc.getRootElement().getChild("volksname").getText();
+					String geo = doc.getRootElement().getChild("geo").getText();
+					String distribution = doc.getRootElement().getChild("distribution").getText();
+					String sun = doc.getRootElement().getChild("sun").getText();
+					String water = doc.getRootElement().getChild("water").getText();
+					String winter = doc.getRootElement().getChild("winter").getText();
+					String size = doc.getRootElement().getChild("size").getText();
+					String bloom = doc.getRootElement().getChild("bloom").getText();
+					String eatable = doc.getRootElement().getChild("eatable").getText();
+					String med = doc.getRootElement().getChild("med").getText();
+					
+					this.datas.get(plantName).addInformation("volksname", volksname);
+					this.datas.get(plantName).addInformation("geo", geo);
+					this.datas.get(plantName).addInformation("distribution", distribution);
+					this.datas.get(plantName).addInformation("sun", sun);
+					this.datas.get(plantName).addInformation("water", water);
+					this.datas.get(plantName).addInformation("winter", winter);
+					this.datas.get(plantName).addInformation("size", size);
+					this.datas.get(plantName).addInformation("bloom", bloom);
+					this.datas.get(plantName).addInformation("eatable", eatable);
+					this.datas.get(plantName).addInformation("med", med);
 					break;
 				default:
-					System.out.println("XmlReader: Please choose a mode when using readContent: \"catalog\", \"meta\" or \"taxa\"");
+					System.out.println("XmlReader: Please choose a mode when using readContent: \"catalog\", \"meta\", \"taxa\" or \"descriptions\"");
 			}
 		} else {
 			System.out.println("XmlReader: Error file " + xmlFile.getAbsolutePath() + " does not exist");
