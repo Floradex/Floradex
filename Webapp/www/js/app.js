@@ -1,5 +1,4 @@
 angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'])
-
 .factory('Plants', function($http) {
     return {
         all: function(callback) {
@@ -15,28 +14,34 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         }
     }
 })
-
 //if cookies are disabled localStorage will not work and throw the error that the operation "is unsafe"
 .factory('PlantStorage', function() {
     return {
         init: function() {
             //backup to clear storage
             //localStorage.clear();
-            //console.log(new String("Trying to load plants from storage...") + "");
+            console.log(new String("Trying to load plants from storage...") + "");
             var plantString = window.localStorage.getItem('plants');
             if (plantString) {
                 console.log(plantString.split(";"));
                 return plantString.split(";");
             }
-            //console.log(new String("no data in storage found") + "");
+            console.log(new String("no data in storage found") + "");
             return [];
         },
         saveToHerbarium: function(plant) {
             var savedPlants = window.localStorage.getItem('plants');
             if (savedPlants) {
+				// check if plant is already in herbarium
                 console.log(new String("Plants in own herbarium: ") + savedPlants);
-                console.log(new String("Adding plant ") + plant);
-                window.localStorage.setItem('plants', savedPlants + ";" + plant);
+				var result = savedPlants.search(plant);
+				if(result == -1) {
+					console.log(new String("Adding plant ") + plant);
+					window.localStorage.setItem('plants', savedPlants + ";" + plant);
+				}
+				else {
+					console.log(new String("Plant ") + plant + " already in herbarium");
+				}
             } else {
                 console.log(new String("Saving plant ") + plant + new String(" in empty storage"));
                 window.localStorage.setItem('plants', plant);
@@ -51,6 +56,16 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 return [];
             }
         },
+		inHerbarium: function(plantID) {
+			var plants = window.localStorage.getItem('plants');
+			if(plants) {
+				var result = plants.search(plantID);
+				if(result > -1) {
+					return true;
+				}
+			}
+			return false;
+		},
 		removeFromHerbarium: function(plantID) {
 			var plants = window.localStorage.getItem('plants').split(";");
 			var indexOfPlant = plants.indexOf(plantID);
@@ -60,6 +75,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
 				temp += plant + ";";
 			}
 			window.localStorage.setItem('plants', temp);
+            console.log("removed:" + temp)
 		}
     }
 })
@@ -67,9 +83,6 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
 .controller('MainCtrl', function($scope, $ionicScrollDelegate, $ionicPopover, $ionicModal, Plants, MenuData, PlantStorage) { // $ionicPopover,
         // debugging:
         var showModalViewsOnStartup = false;
-
-        // reset Herbarium
-        //window.localStorage.setItem('plants', "");
 
         // vars
         var plantIdsLookup = {};
@@ -387,18 +400,31 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         }
 
         // Herbarium
-        $scope.putPlantIntoHerbarium = function(plant) {
+        $scope.putPlantIntoHerbarium = function(plantId) {
             //console.log("Saving plant " + plant + " to my herbarium");
-            if (!$scope.herbariumContains(plant)) {
-                $scope.herbarium = $scope.herbarium.concat($scope.herbarium, plant.SampleID);
-                PlantStorage.saveToHerbarium(plant);
-            }
+            // console.log("adding" + plant + "to ");
+            // console.log( $scope.herbarium);
+            // if (!$scope.herbariumContains(plant)) {
+            //     console.log("adddddd" + plant);
+            //     $scope.herbarium = $scope.herbarium.concat($scope.herbarium, plant.SampleID);
+                PlantStorage.saveToHerbarium(plantId);
+            // } else {
+            //     console.log("not ")
+            // }
             $scope.moreInfosSettings.isInHerbarium = true;
         }
+        $scope.removePlantFromHerbarium = function(plantId) { 
+             // if (!$scope.herbariumContains(plantId)) {
+             //    remove($scope.herbarium, plantId);
+                PlantStorage.removeFromHerbarium(plantId);
+             // }
+            $scope.moreInfosSettings.isInHerbarium = false;
+        }
 
-        $scope.herbariumContains = function(plant) {
-            if ($scope.currentMoreInfoPlant == undefined) return false;
-            return contains($scope.herbarium, plant.SampleID);
+        $scope.herbariumContains = function(plantId) {
+            // if ($scope.currentMoreInfoPlant == undefined) return false;
+            // return contains($scope.heqrbarium, plant.SampleID);
+            return PlantStorage.inHerbarium(plantId);
         }
 
         // Popover
@@ -530,11 +556,12 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             if ($scope.currentMoreInfoPlant != undefined) $scope.currentMoreInfoPlant.isShownInModalView = false;
             plant.isShownInModalView = true; // gelbe umrandung
             $scope.currentMoreInfoPlant = plant;
-            $scope.moreInfosSettings.isInHerbarium = $scope.herbariumContains(plant);
+            $scope.moreInfosSettings.isInHerbarium = $scope.herbariumContains(plant.SampleID);
             if ($scope.currentMoreInfoPlant.associatedMedia != "" && !modalShown) {
                 $scope.openModal();
             }
-            if (plant.Locality.includes("Unknown")) {
+			var result = plant.Locality.search("Unknown");
+            if (result > -1) {
                 $scope.map.zoom = 1;
                 $scope.mapTo("Central Europe");
             } else {
@@ -551,12 +578,12 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                     var location = results[0].geometry.location;
-                    console.log(location);
+                    //console.log(location);
                     $scope.map.center = {
                         latitude: location.A,
                         longitude: location.F
                     };
-                    $scope.map.refresh(); 
+                    //$scope.map.refresh(); 
                     //$scope.myMap.panTo(location);
                 }
             });

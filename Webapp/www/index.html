@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>floradex</title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="lib/ionic-ion-drawer/ionic.contrib.drawer.css" rel="stylesheet">
@@ -14,10 +14,9 @@
     <script src="cordova.js"></script>
     <script src="js/app.js"></script>
     <script src="lib/ionic-ion-drawer/ionic.contrib.drawer.js"></script>
-    <script src='/lib/lodash/lodash.min.js'></script>
-    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
-    <script src='/lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
-
+    <script src='lib/lodash/lodash.min.js'></script>
+    <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src='lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
 </head>
 
 <body ng-app="floradex" ng-controller="MainCtrl">
@@ -26,7 +25,6 @@
 
 
          MAIN CONTENT 
-
 
 
          -->
@@ -41,7 +39,7 @@
                     </div>
                     <div class="col vorschau-div color-col-2">
                         <div ng-repeat="attribute in vorschauBlatt">
-                            <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
+                            <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }" style="padding:1.5em;">
                         </div>
                         <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" style="padding:1.5em; z-index=1;">
                     </div>
@@ -129,25 +127,31 @@
 
 
          -->
+
         <script id="image-modal.html" type="text/ng-template">
             <ion-modal-view style="width: calc(100% - 250px) !important; height: calc(100% - 75px); top: 0%; left: 0%; right: 250px; bottom: 75px;">
                 <ion-header-bar class="bar-top-no-border floracolor-yellow">
                     <h1 class="title">{{currentMoreInfoPlant.ScientificName}}</h1>
                     <div class="buttons">
+
                         <button class="button button-clear icon ion-android-print button-large" ng-click="" />
-                        <button ng-if="!moreInfosSettings.isInHerbarium" class="button button-clear icon ion-ios-star-outline button-large" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)" />
-                        <button ng-if="moreInfosSettings.isInHerbarium" class="button button-clear icon ion-ios-star button-large" ng-click="" />
+                            
+                        <div ng-switch on="moreInfosSettings.isInHerbarium">
+                            <button class="button button-clear icon ion-ios-star button-large" ng-switch-when="true" ng-click="removePlantFromHerbarium(currentMoreInfoPlant.SampleID)" />
+                            <button class="button button-clear icon ion-ios-star-outline button-large" ng-switch-when="false" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)"/>
+                        </div>
+
                         <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="closeModal()" />
                     </div>
                 </ion-header-bar>
                 <ion-content class="floracolor-yellow more-infos">
                     <div class="row">
                         <div class="col">
-                             <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-                             </ui-gmap-google-map>
+                            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                            </ui-gmap-google-map>
                         </div>
                         <div class="col mi-col-upper">
-                             <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" ng-click="openFullscreenModal()" />
+                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" ng-click="openFullscreenModal()" />
                         </div>
                         <div class="col mi-col-upper">
                             <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-200.png" />
@@ -174,7 +178,6 @@
                             </div>
                         </div>
                         <div class="col mi-col-lower">
-
                         </div>
                     </div>
                 </ion-content>

@@ -486,6 +486,7 @@ Modal Overlay more info view tecnical stuff
     color: white;
     border-radius: 25px;
     padding: 10px;
+    z-index: 999;
 }
 
 .angular-google-map-container {
