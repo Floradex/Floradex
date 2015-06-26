@@ -17,3 +17,21 @@ css
 rounded corners
 
   border-radius: 25px;
+
+non clickable: 
+
+	 pointer-events: none; // auto
+
+.translucent {
+     opacity: 0.3;
+    filter: alpha(opacity=30); // For IE
+    -moz-opacity:0.3; // For Firefox < 5.0
+}
+
+.grayscale {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+}

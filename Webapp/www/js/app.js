@@ -1,84 +1,85 @@
 angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'])
-.factory('Plants', function($http) {
-    return {
-        all: function(callback) {
-            return $http.get('resources/allPlants.json').success(callback);
+    // http://angular-ui.github.io/angular-google-maps/#!/api
+    .factory('Plants', function($http) {
+        return {
+            all: function(callback) {
+                return $http.get('resources/allPlants.json').success(callback);
+            }
         }
-    }
-})
+    })
 
 .factory('MenuData', function($http) {
-    return {
-        all: function(callback) {
-            return $http.get('resources/menuStructure.json').success(callback);
+        return {
+            all: function(callback) {
+                return $http.get('resources/menuStructure.json').success(callback);
+            }
         }
-    }
-})
-//if cookies are disabled localStorage will not work and throw the error that the operation "is unsafe"
-.factory('PlantStorage', function() {
-    return {
-        init: function() {
-            //backup to clear storage
-            //localStorage.clear();
-            console.log(new String("Trying to load plants from storage...") + "");
-            var plantString = window.localStorage.getItem('plants');
-            if (plantString) {
-                console.log(plantString.split(";"));
-                return plantString.split(";");
-            }
-            console.log(new String("no data in storage found") + "");
-            return [];
-        },
-        saveToHerbarium: function(plant) {
-            var savedPlants = window.localStorage.getItem('plants');
-            if (savedPlants) {
-				// check if plant is already in herbarium
-                console.log(new String("Plants in own herbarium: ") + savedPlants);
-				var result = savedPlants.search(plant);
-				if(result == -1) {
-					console.log(new String("Adding plant ") + plant);
-					window.localStorage.setItem('plants', savedPlants + ";" + plant);
-				}
-				else {
-					console.log(new String("Plant ") + plant + " already in herbarium");
-				}
-            } else {
-                console.log(new String("Saving plant ") + plant + new String(" in empty storage"));
-                window.localStorage.setItem('plants', plant);
-            }
-        },
-        loadHerbarium: function() {
-            var plants = window.localStorage.getItem('plants').split(";");
-            if (plants) {
-                console.log(plants);
-                return plants;
-            } else {
+    })
+    //if cookies are disabled localStorage will not work and throw the error that the operation "is unsafe"
+    .factory('PlantStorage', function() {
+        return {
+            init: function() {
+                //backup to clear storage
+                //localStorage.clear();
+                console.log(new String("Trying to load plants from storage...") + "");
+                var plantString = window.localStorage.getItem('plants');
+                if (plantString) {
+                    console.log(plantString.split(";"));
+                    return plantString.split(";");
+                }
+                console.log(new String("no data in storage found") + "");
                 return [];
+            },
+            saveToHerbarium: function(plant) {
+                var savedPlants = window.localStorage.getItem('plants');
+                if (savedPlants) {
+                    // check if plant is already in herbarium
+                    console.log(new String("Plants in own herbarium: ") + savedPlants);
+                    var result = savedPlants.search(plant);
+                    if (result == -1) {
+                        console.log(new String("Adding plant ") + plant);
+                        window.localStorage.setItem('plants', savedPlants + ";" + plant);
+                    } else {
+                        console.log(new String("Plant ") + plant + " already in herbarium");
+                    }
+                } else {
+                    console.log(new String("Saving plant ") + plant + new String(" in empty storage"));
+                    window.localStorage.setItem('plants', plant);
+                }
+            },
+            loadHerbarium: function() {
+                var temp = window.localStorage.getItem('plants');
+                if (temp) {
+					var plants = temp.split(";");
+                    console.log(plants);
+                    return plants;
+                } else {
+                    return [];
+                }
+            },
+            inHerbarium: function(plantID) {
+                var plants = window.localStorage.getItem('plants');
+                if (plants) {
+                    var result = plants.search(plantID);
+                    if (result > -1) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            removeFromHerbarium: function(plantID) {
+                var plants = window.localStorage.getItem('plants').split(";");
+                var indexOfPlant = plants.indexOf(plantID);
+                plants.splice(indexOfPlant, 1);
+                var temp = "";
+                for (plant in plants) {
+                    temp += plant + ";";
+                }
+                window.localStorage.setItem('plants', temp);
+                console.log("removed:" + temp)
             }
-        },
-		inHerbarium: function(plantID) {
-			var plants = window.localStorage.getItem('plants');
-			if(plants) {
-				var result = plants.search(plantID);
-				if(result > -1) {
-					return true;
-				}
-			}
-			return false;
-		},
-		removeFromHerbarium: function(plantID) {
-			var plants = window.localStorage.getItem('plants').split(";");
-			var indexOfPlant = plants.indexOf(plantID);
-			plants.splice(indexOfPlant, 1);
-			var temp = "";
-			for(plant in plants) {
-				temp += plant + ";";
-			}
-			window.localStorage.setItem('plants', temp);
-            console.log("removed:" + temp)
-		}
-    }
-})
+        }
+    })
 
 .controller('MainCtrl', function($scope, $ionicScrollDelegate, $ionicPopover, $ionicModal, Plants, MenuData, PlantStorage) { // $ionicPopover,
         // debugging:
@@ -115,7 +116,8 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 latitude: 45,
                 longitude: -73
             },
-            zoom: 8
+            zoom: 8,
+            dragging: false
         };
 
         // load Json
@@ -131,12 +133,35 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             // Hier dinge testen
         });
 
+        function reorderMenu(ebene2) {
+            // Make loolup
+            var lookup = {};
+            for (var i = 0, len = ebene2.children.length; i < len; i++) {
+                lookup[ebene2.children[i].name] = ebene2.children[i];
+            }
+
+            // return 
+            var newOrder = [];
+
+            // do it
+            if (ebene2.name == "Wuchsform") {
+                newOrder.push(lookup["Baum"]);
+                newOrder.push(lookup["Kraut/Staude"]);
+                ebene2.children = newOrder;
+            }
+            return ebene2;
+
+        }
+
         MenuData.all(function(menuData) { // Menu data json
             // add random class
             for (var i = menuData.length - 1; i >= 0; i--) {
                 var ebene1 = menuData[i];
                 for (var j = ebene1.children.length - 1; j >= 0; j--) {
-                    ebene1.children[j].children.push({ // Unspezifische klasse hinzufügen
+                    // in richtige reihenfolge bringen
+                    var ebene2 = ebene1.children[j];
+                    ebene1.children[j] = reorderMenu(ebene2);
+                    ebene2.children.push({ // Unspezifische klasse hinzufügen
                         name: "fragezeichen"
                     })
                 };
@@ -174,8 +199,18 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         $scope.menuSelectItem = function(child, parent, grandparent) {
             if (child.name == "fragezeichen") { // Handle fragezeichen
                 child.selected = !child.selected;
+
                 // change image to child image
                 if (child.selected) {
+                    // disable previous one if same category
+                    if ($scope.selectedMerkmale[parent.name]) {
+                        $scope.selectedMerkmale[parent.name].selected = false;
+                        addRemove("remove", grandparent.name, $scope.selectedMerkmale[parent.name]);
+                    }
+                    // add to merkmale (for results)
+                    if (!child.grandparent) child.grandparent = grandparent.name;
+                    $scope.selectedMerkmale[parent.name] = child;
+
                     parent.imageName = $scope.getImageName(child);
                     parent.selected = true;
                 } else {
@@ -339,45 +374,32 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         }
 
         function searchPlant(name) {
-            var result = -1;
-            var results = new Array([0]);
-            for (plant in $scope.plants) {
-                result = plant.ScientificName.search(name);
-                if (result > -1) {
-                    results = results.concat(results, new Array([plant]));
-                } else {
-                    result = plant.descriptionText.search(name);
-                    if (result > -1) {
-                        results = results.concat(results, new Array([plant]));
-                    } else {
-                        result = plant.t_subclass.search(name);
-                        if (result > -1) {
-                            results = results.concat(results, new Array([plant]));
-                        } else {
-                            result = plant.t_superorder.search(name);
-                            if (result > -1) {
-                                results = results.concat(results, new Array([plant]));
-                            } else {
-                                result = plant.t_order.search(name);
-                                if (result > -1) {
-                                    results = results.concat(results, new Array([plant]));
-                                } else {
-                                    result = plant.t_family.search(name);
-                                    if (result > -1) {
-                                        results = results.concat(results, new Array([plant]));
-                                    } else {
-                                        result = plant.t_genus.search(name);
-                                        if (result > -1) {
-                                            results = results.concat(results, new Array([plant]));
-                                        }
-                                    }
+            function containsTextInAnyProperty(plant) {
+                for (var property in plant) {
+                    if (plant.hasOwnProperty(property)) {
+                        if (property != "BasisOfRecord" ||  
+                            property != "InstitutionCode" ||
+                            property != "CollectionCode" ||
+                            property != "CatalogNumber" ||
+                            property != "Family" ||
+                            property != "Country" ||
+                            property != "associatedMedia") {
+                            if (typeof(plant[property]) == 'string') {
+                                if (plant[property].toLowerCase().includes(name.toLowerCase())) {
+                                    plant.foundProperty = plant[property];
+                                    return true;
                                 }
                             }
+
                         }
+
+
                     }
                 }
+                plant.foundProperty = "";
+                return false;
             }
-            return results;
+            return $scope.plants.filter(containsTextInAnyProperty);
         }
 
         function searchTrait(trait) {
@@ -400,31 +422,54 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         }
 
         // Herbarium
-        $scope.putPlantIntoHerbarium = function(plantId) {
-            //console.log("Saving plant " + plant + " to my herbarium");
-            // console.log("adding" + plant + "to ");
-            // console.log( $scope.herbarium);
-            // if (!$scope.herbariumContains(plant)) {
-            //     console.log("adddddd" + plant);
-            //     $scope.herbarium = $scope.herbarium.concat($scope.herbarium, plant.SampleID);
+        $scope.putPlantIntoHerbariumOrRemove = function(plantId) {
+            if (!$scope.herbariumContains(plantId)) {
                 PlantStorage.saveToHerbarium(plantId);
-            // } else {
-            //     console.log("not ")
-            // }
-            $scope.moreInfosSettings.isInHerbarium = true;
-        }
-        $scope.removePlantFromHerbarium = function(plantId) { 
-             // if (!$scope.herbariumContains(plantId)) {
-             //    remove($scope.herbarium, plantId);
+            } else {
                 PlantStorage.removeFromHerbarium(plantId);
-             // }
-            $scope.moreInfosSettings.isInHerbarium = false;
+            }
+        }
+        $scope.herbariumContains = function(plantId) {
+            return PlantStorage.inHerbarium(plantId);
         }
 
-        $scope.herbariumContains = function(plantId) {
-            // if ($scope.currentMoreInfoPlant == undefined) return false;
-            // return contains($scope.heqrbarium, plant.SampleID);
-            return PlantStorage.inHerbarium(plantId);
+        $scope.wortsucheEnable = function() {
+
+            $scope.resultMode = "SearchResults";
+            $scope.openSearchModal();
+            $scope.hideFloradexOverlay();
+            $scope.closeDrawer();
+            $scope.closeModal();
+            $scope.search.text(_text);
+        }
+
+        $scope.baukastenEnable = function() {
+            $scope.hideSearchModal();
+            $scope.hideFloradexOverlay();
+            $scope.closeDrawer();
+            $scope.results = $scope.plants;
+            $scope.resultMode = "Baukasten";
+            updateResults();
+        }
+
+        $scope.herbariumShow = function() {
+            $scope.hideSearchModal();
+            $scope.hideFloradexOverlay();
+            $scope.closeDrawer();
+            // get all plants
+            var results = [];
+            var herbarium = PlantStorage.loadHerbarium();
+            console.log(herbarium)
+            for (var i = herbarium.length - 1; i >= 0; i--) {
+                var currentPlantId = herbarium[i];
+                var plant = plantIdsLookup[currentPlantId];
+                if (plant) {
+                    results.push(plant);
+                }
+            };
+            $scope.resultMode = "MeinHerbarium";
+            $scope.results = results;
+            $scope.updateNumbers();
         }
 
         // Popover
@@ -450,7 +495,9 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             $scope.popover.remove();
         });
         $scope.$on('popover.hidden', function() {
+
             $scope.currentPopoverMenuItem.hightlighted = false;
+            $scope.currentPopoverMenuItem = null; // TODO
         });
         $scope.$on('popover.removed', function() {
             // Execute action
@@ -460,7 +507,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         // Results View
         $scope.padding = 5;
 
-        var jumps = [0, 5, 20, 60] // Die sprünge 
+        var jumps = [0, 5, 30, 60] // Die sprünge 
         $scope.updateNumbers = function() {
             $scope.countOfResults = $scope.results.length;
             if ($scope.countOfResults >= jumps[0] && $scope.countOfResults < jumps[1]) {
@@ -479,6 +526,8 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             $ionicScrollDelegate.$getByHandle("resultsScrollView").resize();
             // http://ionicframework.com/docs/api/service/$ionicScrollDelegate/
         }
+
+
 
         // Modal image view
         $ionicModal.fromTemplateUrl('image-modal.html', {
@@ -503,6 +552,15 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             }
         });
 
+        // modal search
+        $ionicModal.fromTemplateUrl('search.html', {
+            id: '4',
+            scope: $scope,
+            backdropClickToClose: false
+        }).then(function(modal) {
+            $scope.modalSearch = modal;
+        });
+
         // modal fullscreen
         $ionicModal.fromTemplateUrl('image-fullscreen.html', {
             id: '3',
@@ -511,6 +569,8 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         }).then(function(modal) {
             $scope.modalFullscreenImage = modal;
         });
+
+
 
         // show modals
         $scope.openModal = function() {
@@ -524,13 +584,27 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             $ionicScrollDelegate.$getByHandle('fullscreenScrollview').zoomBy(initialZoomForFullscreenImage);
         };
 
+        $scope.openSearchModal = function(plant) {
+            $scope.modalSearch.show();
+        };
+
         // close modals
         $scope.closeModal = function() {
             $scope.modal.hide();
-            $scope.currentMoreInfoPlant.isShownInModalView = false; // gelbe umrandung
+            if ($scope.resultMode == "SearchResults") {
+                $scope.openSearchModal();
+            }
+            if ($scope.currentMoreInfoPlant != undefined) $scope.currentMoreInfoPlant.isShownInModalView = false; // gelbe umrandung
         };
         $scope.hideFloradexOverlay = function(plant) {
             $scope.modalFloradexImage.hide();
+        }
+
+        $scope.hideSearchModal = function(disableSearchMode) {
+            if (disableSearchMode != undefined && disableSearchMode == true) {
+                $scope.resultMode = "Baukasten";
+            }
+            $scope.modalSearch.hide();
         }
         $scope.hideFullscreenImageOverlay = function(plant) {
                 $scope.modalFullscreenImage.hide();
@@ -541,6 +615,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             $scope.modal.remove();
             $scope.modalFloradexImage.remove();
             $scope.modalFullscreenImage.remove();
+            $scope.modalSearch.remove();
         });
 
         // Check if shown
@@ -553,6 +628,12 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         });
 
         $scope.showImage = function(plant) {
+            if ($scope.resultMode == "SearchResults") {
+                $scope.hideSearchModal();
+                $scope.openModal();
+            }
+
+
             if ($scope.currentMoreInfoPlant != undefined) $scope.currentMoreInfoPlant.isShownInModalView = false;
             plant.isShownInModalView = true; // gelbe umrandung
             $scope.currentMoreInfoPlant = plant;
@@ -560,19 +641,25 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             if ($scope.currentMoreInfoPlant.associatedMedia != "" && !modalShown) {
                 $scope.openModal();
             }
-			var result = plant.Locality.search("Unknown");
-            if (result > -1) {
-                $scope.map.zoom = 1;
-                $scope.mapTo("Central Europe");
-            } else {
-                $scope.map.zoom = 4;
-                $scope.mapTo(plant.Locality);
+            if (plant.geo != undefined) { // our geo
+                $scope.mapTo(plant.geo);
+            } else { // Herbarium geo
+                var result = plant.Locality.search("Unknown");
+                if (result > -1) {
+                    $scope.map.zoom = 1;
+                    $scope.mapTo("Central Europe");
+                } else {
+                    $scope.map.zoom = 4;
+                    $scope.mapTo(plant.Locality);
+                }
             }
+
 
         }
 
         // Maps stuff
         $scope.mapTo = function(address) {
+            //console.log(address);
             geocoder.geocode({
                 "address": address
             }, function(results, status) {
@@ -588,6 +675,25 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 }
             });
         }
+
+        // search
+        var _text;
+        $scope.search = {
+            text: function(newText) {
+                if (newText == "") {
+                    for (var i = $scope.plants.length - 1; i >= 0; i--) {
+                        $scope.plants[i].foundProperty = "";
+                    };
+                } else if (newText != undefined) { // On every text change
+
+                    $scope.results = searchPlant(newText);
+                    $scope.resultMode = "SearchResults"; // or "MeinHerbarium" or "SearchResults"
+                    $scope.updateNumbers();
+
+                }
+                return arguments.length ? (_text = newText) : _text;
+            }
+        };
 
     })
     .directive('errSrc', function() { // change image source on error

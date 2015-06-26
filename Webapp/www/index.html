@@ -27,6 +27,7 @@
          MAIN CONTENT 
 
 
+
          -->
         <ion-side-menu-content>
             <ion-content class="bg-gradient-meh" scroll="false">
@@ -66,9 +67,9 @@
                         <ion-content>
                             <ion-scroll direction="y" class="popover-scroller">
                                 <div ng-class="(child.selected == true) ? 'popover-photo photo-selected' : 'popover-photo popover-photo-hoverble'" collection-repeat="child in currentPopoverMenuItem.children" item-height="140" item-width="75" ng-click="menuSelectItem(child, currentPopoverMenuItem, currentPopoverMenuSuperItem)">
-                                    <img class="second-row-image" ng-src="resources/images/menu/{{replaceAllSpecialCharactersInString(child.name)}}.png">
+                                    <img ng-class="(child.selected == true) ? 'second-row-image' : 'second-row-image inverted'" ng-src="resources/images/menu/{{replaceAllSpecialCharactersInString(child.name)}}.png">
                                     <br>
-                                    <div class="second-row-text"> {{child.name}}</div>
+                                    <div class="second-row-text"> {{(child.name == 'fragezeichen') ? 'Ich weiß nicht' : child.name}}</div>
                                 </div>
                             </ion-scroll>
                         </ion-content>
@@ -80,13 +81,12 @@
                 Eigentliches Menü 
 
 
-
                 -->
-                <div class="flora-menu bg-gradient-dark">
+                <div ng-class="(resultMode != 'Baukasten') ? 'menu-not-clickable flora-menu bg-gradient-dark' : 'flora-menu bg-gradient-dark'">
                     <div class="submenu" ng-repeat="superMenuData in menuData">
                         <ul>
-                            <li ng-class="(data.hightlighted == true) ? 'floramenu-li-item-highlighted' : (data.selected == true) ? 'floramenu-li-item-selected' : ''" ng-repeat="data in superMenuData.children" ng-click="showMenuPopover($event, data, superMenuData)">
-                                <img id="{{ 'menuImg-' + replaceAllSpecialCharactersInString(data.name) }}" class="second-row-image" ng-src="resources/images/menu/{{getImageName(data)}}.png">
+                            <li ng-class="(data.hightlighted == true) ? (data.selected == true) ? 'floramenu-li-item-selected-{{$parent.$index}}' : 'floramenu-li-item-highlighted' : (data.selected == true) ? 'floramenu-li-item-selected-{{$parent.$index}}' : ''" ng-repeat="data in superMenuData.children" ng-click="showMenuPopover($event, data, superMenuData)">
+                                <img id="{{ 'menuImg-' + replaceAllSpecialCharactersInString(data.name) }}" ng-class="(data.selected == true) ? 'second-row-image ' : 'second-row-image'" ng-src="resources/images/menu/{{getImageName(data)}}.png">
                                 <!--  <br> {{ data.name | limitTo:10 }} -->
                             </li>
                         </ul>
@@ -108,18 +108,44 @@
                 <ion-scroll delegate-handle="resultsScrollView" direction="y" class="result-scroller center" ng-style="">
                     <div ng-class="(plant.isShownInModalView == true) ? 'photo photo-sidebar-selected-bg' : 'photo'" collection-repeat="plant in results" item-height="resultSettings.size + padding" item-width="resultSettings.size + padding">
                         <img ng-src="resources/images/thumbnails/{{plant.SampleID}}-{{resultSettings.size}}.png" err-src="resources/images/default/thumbnail-{{resultSettings.size}}.png" ng-click="showImage(plant)">
-                        <div ng-if="resultMode == 'SearchResults'" class="result-plant-name"> {{plant.ScientificName | limitTo:20 }} </div>
+                        <div ng-if="resultMode == 'SearchResults'" class="result-plant-name"> {{plant.foundProperty | limitTo:20 }} </div>
                     </div>
                 </ion-scroll>
             </ion-content>
-            <ion-footer-bar class="floradex-dark-grey bar-top-no-border sidebar-footer">
-                <button class="sidebar-above-header-button button button-clear icon ion-chevron-up" ng-click="toggleDrawer()"></button>
-                <br>
-                <div ng-if="resultMode == 'Baukasten'" class="text">{{countOfResults}} Ergebnisse</div>
+            <ion-footer-bar class="floradex-dark-grey bar-top-no-border sidebar-footer" ng-click="toggleDrawer()">
+                <button class="sidebar-above-header-button button button-clear icon ion-chevron-up"></button>
+                <div ng-if="resultMode == 'Baukasten'" class="text"><i class="icon ion-search sidebar-footer-magnifier"></i> {{countOfResults}} Ergebnisse</div>
                 <div ng-if="resultMode == 'MeinHerbarium'" class="text">Mein Herbarium</div>
                 <div ng-if="resultMode == 'SearchResults'" class="text">{{countOfResults}} Ergebnisse</div>
             </ion-footer-bar>
         </ion-side-menu>
+        <!-- 
+
+
+        SERACH PLANT MODAL VIEW
+
+
+        -->
+        <script id="search.html" type="text/ng-template">
+            <ion-modal-view style="width: calc(100% - 250px) !important; height: 100%; top: 0%; left: 0%; right: 250px; bottom: 0%;">
+            <ion-header-bar class="bar-top-no-border floracolor-main">
+            <h1 class="title"></h1>
+                    <div class="buttons">
+
+                        <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="hideSearchModal(true)" />
+                    </div>
+                </ion-header-bar>
+                <ion-content class="search-modal floracolor-main super-center">
+                    <div class="search-text"> Gib hier den Namen der Pflanze, ihre Art, ihr Blalablubb an:</div>
+                    <div class="list list-inset search-input">
+                        <label class="item item-input">
+                            <i class="icon ion-search placeholder-icon"></i>
+                            <input type="text" ng-model="search.text" ng-model-options="{ getterSetter: true }"  placeholder="Gib hier den Namen der Pflanze, ihre Art, ihr Blalablubb an">
+                        </label>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
         <!--
 
 
@@ -127,27 +153,20 @@
 
 
          -->
-
         <script id="image-modal.html" type="text/ng-template">
-            <ion-modal-view style="width: calc(100% - 250px) !important; height: calc(100% - 75px); top: 0%; left: 0%; right: 250px; bottom: 75px;">
+            <ion-modal-view style="width: calc(100% - 250px) !important; height: calc(100% - 75px); top: 0%; left: 0%; right: 250px; bottom: 75px;" class="modal-high">
                 <ion-header-bar class="bar-top-no-border floracolor-yellow">
-                    <h1 class="title">{{currentMoreInfoPlant.ScientificName}}</h1>
+                    <h1 class="title">{{currentMoreInfoPlant.volksname}} - {{currentMoreInfoPlant.ScientificName}}</h1>
                     <div class="buttons">
-
                         <button class="button button-clear icon ion-android-print button-large" ng-click="" />
-                            
-                        <div ng-switch on="moreInfosSettings.isInHerbarium">
-                            <button class="button button-clear icon ion-ios-star button-large" ng-switch-when="true" ng-click="removePlantFromHerbarium(currentMoreInfoPlant.SampleID)" />
-                            <button class="button button-clear icon ion-ios-star-outline button-large" ng-switch-when="false" ng-click="putPlantIntoHerbarium(currentMoreInfoPlant.SampleID)"/>
-                        </div>
-
+                        <button class="button button-clear icon button-large" ng-class="(herbariumContains(currentMoreInfoPlant.SampleID)) ? 'ion-ios-star' : 'ion-ios-star-outline'" ng-click="putPlantIntoHerbariumOrRemove(currentMoreInfoPlant.SampleID)" />
                         <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="closeModal()" />
                     </div>
                 </ion-header-bar>
                 <ion-content class="floracolor-yellow more-infos">
                     <div class="row">
-                        <div class="col">
-                            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                        <div class="col grayscale">
+                            <ui-gmap-google-map dragging='map.dragging' center='map.center' zoom='map.zoom'>
                             </ui-gmap-google-map>
                         </div>
                         <div class="col mi-col-upper">
@@ -159,25 +178,71 @@
                     </div>
                     <div class="row">
                         <div class="col mi-col-lower">
-                            <h3>Botanische Einordnung</h3>
-                            <div>
-                                Subklasse: {{currentMoreInfoPlant.t_subclass}}
-                                <br> Ordnung: {{currentMoreInfoPlant.t_order}}
-                                <br> Unterordnung: {{currentMoreInfoPlant.t_superorder}}
-                                <br> Familie: {{currentMoreInfoPlant.t_family}}
-                                <br> Gattung: {{currentMoreInfoPlant.t_genus}}
-                                <br> Standort: {{currentMoreInfoPlant.HigherGeography}}
+                            <div class="meta-holder">
+                                <i class="icon ion-navigate more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.geo}}
+                                </div>
                             </div>
                         </div>
                         <div class="col mi-col-lower">
-                            <h3>Beschreibung</h3>
-                            <div>
-                                {{currentMoreInfoPlant.descriptionText}}
-                                <br> Quelle: <a href="https://de.wikipedia.org">Wikipedia</a>
-                                <br>
+                            <div class="meta-holder">
+                                <i class="icon ion-ios-sunny-outline more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.sun}}
+                                </div>
                             </div>
                         </div>
                         <div class="col mi-col-lower">
+                            <div class="meta-holder">
+                                <i class="icon ion-ios-rose-outline more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.bloom}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="meta-holder">
+                                <i class="icon ion-ios-location more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.distribution}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="meta-holder">
+                                <i class="icon ion-waterdrop more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.water}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="meta-holder">
+                                <i class="icon ion-pizza more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.eatable}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="meta-holder">
+                                <i class="icon ion-arrow-resize more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.size}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="meta-holder">
+                                <i class="icon ion-ios-snowy more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.winter}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="meta-holder">
+                                <i class="icon ion-medkit more-infos-fat-icon"></i>
+                                <div class="meta-text"> {{currentMoreInfoPlant.med}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ion-content>
@@ -207,11 +272,11 @@
         <drawer side="right">
             <ion-content class="floradex-dark-grey">
                 <ion-list class="main-menu-list">
-                    <ion-item class="no-style-list" ng-click="hideFloradexOverlay();closeDrawer();">
+                    <ion-item class="no-style-list" ng-click="baukastenEnable();">
                         <i class="icon ion-ios-search-strong"></i> Pflanze bestimmen</ion-item>
-                    <ion-item class="no-style-list" ng-click="hideFloradexOverlay();closeDrawer();"><i class="icon ion-arrow-right-a"></i> Wort suchen</ion-item>
-                    <ion-item class="no-style-list" ng-click="hideFloradexOverlay();closeDrawer();"><i class="icon ion-shuffle"></i> Zufällige Pflanze</ion-item>
-                    <ion-item class="no-style-list" ng-click="hideFloradexOverlay();closeDrawer();"><i class="icon ion-ios-book-outline"></i> Mein Herbarium</ion-item>
+                    <ion-item class="no-style-list" ng-click="wortsucheEnable();"><i class="icon ion-arrow-right-a"></i> Wort suchen</ion-item>
+                    <!--<ion-item class="no-style-list" ng-click="hideFloradexOverlay();closeDrawer();"><i class="icon ion-shuffle"></i> Zufällige Pflanze</ion-item>-->
+                    <ion-item class="no-style-list" ng-click="herbariumShow();"><i class="icon ion-ios-book-outline"></i> Mein Herbarium</ion-item>
                 </ion-list>
                 <br>
                 <!-- <button class=" icon ion-close-round" ng-click="closeDrawer();modalFloradexImage.hide();"></button> -->
@@ -230,12 +295,13 @@
                     <ion-scroll zooming="true" direction="xy" scrollbar-x="true" scrollbar-y="true" delegate-handle="fullscreenScrollview" class="ion-scroll-height-fix" min-zoom="0.3">
                         <img ng-src="{{currentMoreInfoPlant.associatedMedia}}" ng-click="hideFullscreenImageOverlay()">
                     </ion-scroll>
-                    <div class="fullscreen-image-text-bubble">
+                    <div class="fullscreen-image-text-bubble" ng-click="hideFullscreenImageOverlay()">
                         Bild antippen um zu schließen
                     </div>
                 </ion-content>
             </ion-modal-view>
         </script>
+        
 </body>
 
 </html>
