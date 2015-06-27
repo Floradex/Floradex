@@ -20,4 +20,4 @@ Für die Bilder dieses Projekts, die bei Veröffentlichung unter keiner Lizenz s
 - Einsehbar ist die Lizenz hier https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 - Als Kurzfassung hier https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-Alle weiteren Inhalte (Quellcode, Bilder, Bibliotheken, Binaries usw.) behalten ihre jeweilige Lizenz. Die entsprechenden Lizenzen sind diesem Projekt beigefügt.
+Alle weiteren Inhalte (Quellcode, Bilder, Bibliotheken, Binaries usw.) behalten ihre jeweilige Lizenz. Die entsprechenden Lizenzen sind diesem Projekt nach bestem Wissen und Gewissen beigefügt.
