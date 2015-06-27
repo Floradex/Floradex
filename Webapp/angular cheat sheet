@@ -1,3 +1,13 @@
+ js 
+
+ iterate over all properties
+ for (var property in object) {
+    if (object.hasOwnProperty(property)) {
+        // do stuff
+    }
+}
+
+
  ng-src
 
 <img ng-src="http://www.gravatar.com/avatar/{{hash}}" alt="Description" />
