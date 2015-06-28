@@ -34,7 +34,7 @@
         <ion-side-menu-content>
             <ion-content class="bg-gradient-meh" scroll="false">
                 <img ng-src="resources/images/default/floradex.png" class="floradex-image-translucent" />
-                <div class="main-content-title" >
+                <div class="main-content-title">
                     {{ getCurrentTitle(); }}
                 </div>
                 <div class="row">
@@ -188,7 +188,9 @@
                             </ui-gmap-google-map>
                         </div>
                         <div class="col mi-col-upper">
-                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-240.png" ng-click="openFullscreenModal()" />
+                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-240.png" ng-click="openFullscreenModal()">
+                            <i class="icon ion-arrow-expand more-infos-enlarge-icon" ng-click="openFullscreenModal()"></i>
+                            </img>
                         </div>
                         <div class="col mi-col-upper">
                             <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-240.png" />
@@ -204,7 +206,7 @@
                         </div>
                         <div class="col mi-col-lower">
                             <div class="meta-holder">
-                                <i class="icon ion-ios-sunny-outline more-infos-fat-icon"></i>
+                                <i class="icon ion-ios-sunny more-infos-fat-icon"></i>
                                 <div class="meta-text">
                                     <div ng-if="currentMoreInfoPlant.sun == 1">Schatten</div>
                                     <div ng-if="currentMoreInfoPlant.sun == 2">Halbschatten</div>
@@ -214,7 +216,7 @@
                         </div>
                         <div class="col mi-col-lower">
                             <div class="meta-holder">
-                                <i class="icon ion-ios-rose-outline more-infos-fat-icon"></i>
+                                <i class="icon ion-ios-rose more-infos-fat-icon"></i>
                                 <div class="meta-text"> {{currentMoreInfoPlant.bloom}}
                                 </div>
                             </div>
@@ -230,7 +232,7 @@
                         </div>
                         <div class="col">
                             <div class="meta-holder">
-                                <i class="icon ion-waterdrop more-infos-fat-icon"></i>
+                                <i class="icon ion-waterdrop more-infos-fat-icon smaller-icon"></i>
                                 <div class="meta-text">
                                     <div ng-if="currentMoreInfoPlant.water == 1">feucht</div>
                                     <div ng-if="currentMoreInfoPlant.water == 2">mittelfeucht</div>
@@ -249,7 +251,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="meta-holder">
-                                <i class="icon ion-arrow-resize more-infos-fat-icon"></i>
+                                <i class="icon ion-arrow-resize more-infos-fat-icon rotate--45"></i>
                                 <div class="meta-text"> {{currentMoreInfoPlant.size}}
                                 </div>
                             </div>
@@ -321,8 +323,7 @@
                     <ion-item class="no-style-list flora-text-size-large" ng-click="herbariumShow();"><i class="icon ion-ios-star drawer-icon"></i>
                         <div class="drawer-text">Mein Herbarium</div>
                     </ion-item>
-
-                     <ion-item ng-if="resultMode == 'Baukasten'" class="no-list-border flora-text-size-large" ng-click="baukastenRemoveAllFilters()"><i class="icon ion-close drawer-icon"></i>
+                    <ion-item ng-if="resultMode == 'Baukasten'" class="no-list-border flora-text-size-large" ng-click="baukastenRemoveAllFilters()"><i class="icon ion-close drawer-icon"></i>
                         <div class="drawer-text">Alle Filter löschen</div>
                     </ion-item>
                 </ion-list>
@@ -343,12 +344,11 @@
                     <ion-scroll zooming="true" direction="xy" scrollbar-x="true" scrollbar-y="true" delegate-handle="fullscreenScrollview" class="ion-scroll-height-fix" min-zoom="0.3">
                         <img ng-src="{{ (currentMoreInfoPlant.altlink) ? currentMoreInfoPlant.altlink : currentMoreInfoPlant.associatedMedia}}" ng-click="hideFullscreenImageOverlay()">
                     </ion-scroll>
-                    <div class="fullscreen-image-text-bubble" ng-click="hideFullscreenImageOverlay()">
-                        Bild antippen um zu schließen
-                    </div>
+                        <i class="icon ion-arrow-shrink fullscreen-image-text-bubble" ng-click="hideFullscreenImageOverlay()"> </i>
                 </ion-content>
             </ion-modal-view>
         </script>
+	</ion-side-menus>
 </body>
 
 </html>

@@ -121,8 +121,8 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         $scope.map = {
             control: {},
             center: {
-                latitude: 51.707395,
-                longitude: 10.512681
+                latitude:  5.820226,
+                longitude: 24.848831
             },
             zoom: 0,
             options: {
@@ -775,7 +775,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 $scope.hideSearchModal();
                 $scope.openModal();
             }
-
+            console.log(plant.SampleID)
 
             if ($scope.currentMoreInfoPlant != undefined) $scope.currentMoreInfoPlant.isShownInModalView = false;
             plant.isShownInModalView = true; // gelbe umrandung

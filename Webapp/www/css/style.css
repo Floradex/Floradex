@@ -153,10 +153,12 @@ html * {
 }*/
 
 .vorschau-item-large {
+	/*-moz-transform:translate(0px,-20%);*/ /* Firefox 3.6 Firefox 4*/
     position: absolute;
     top: 30px;
     left: 5%;
     max-width: 90%;
+	/*max-width: 200px;*/
     padding-top: 15%;
 }
 
@@ -604,6 +606,14 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
   filter: FlipH;                 /* IE 6/7/8 */
 }
 
+.rotate--45 {
+  -moz-transform:  rotate(-45deg) ;    /* Gecko */
+  -o-transform:  rotate(-45deg);      /* Operah */
+  -webkit-transform: rotate(-45deg); /* webkit */
+  transform:  rotate(-45deg);         /* standard */
+  filter: FlipH;                 /* IE 6/7/8 */
+}
+
 /* 
 
 
@@ -647,6 +657,21 @@ Modal Overlay more info view tecnical stuff
   Mehr Infos view
 */
 
+.more-infos-enlarge-icon {
+    position: absolute;
+    bottom: 0.6em;
+    right: 1.3em;
+    color: black;
+    background-color: white;
+    padding: 5px;
+    border-radius: 25px;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    z-index: 999;
+    text-align: center;
+}
+
 .more-infos {
     -moz-user-select: text !important;
     -khtml-user-select: text !important;
@@ -675,7 +700,10 @@ Modal Overlay more info view tecnical stuff
     left: 0;
     font-size: 25px;
     width: 8%;
-    text-align: right;
+    text-align: center;
+}
+.more-infos .smaller-icon {
+    font-size: 17px !important;
 }
 
 .more-infos .image {
@@ -683,6 +711,10 @@ Modal Overlay more info view tecnical stuff
     display: block;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+.more-infos .mi-col-upper {
+        position: relative;
 }
 
 .more-infos .mi-col-upper:hover {
@@ -692,14 +724,19 @@ Modal Overlay more info view tecnical stuff
 }
 
 .fullscreen-image-text-bubble {
+        cursor: pointer;
+    cursor: hand;
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border-radius: 25px;
     padding: 10px;
+    width: 40px;
+    height: 40px;
     z-index: 999;
+    text-align: center;
 }
 
 .angular-google-map-container {
