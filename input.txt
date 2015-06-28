@@ -1,3 +1,593 @@
+Achillea millefolium L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: gefiedert
+			BLATT: unpaarig gefiedert
+			BLATT: doppelt gefiedert
+		Kategorie: Blattform
+			BLATT: lanzettlich
+			BLATT: lineal
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+			BLUETE: rosa
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
+			BLUETE: Rispe 
+
+Carex pseudocyperus
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Wasserpflanze
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: scheidig verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+			BLATT: lineal
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: kreuz-geadert
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: grün
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Anordnung
+			BLUETE: Ähre
+
+Bellis perennis
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: oval
+			BLATT: spatelelig
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+			BLUETE: gelb
+			BLUETE: rosa
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
+
+Lotus corniculatus
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: unpaarig gefiedert
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+			BLUETE: orange
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: glockenförmig
+		Kategorie: Anordnung
+			BLUETE: Dolde
+
+Trifolium pratense
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+			LEBENSFORM: verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: dreizählig gefiedert
+			BLATT: gefiedert
+		Kategorie: Blattform
+			BLATT: oval
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: rot
+			BLUETE: rosa
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: röhrenförmig
+		Kategorie: Anordnung
+			BLUETE: Traube
+			BLUETE: Ähre
+
+Glechoma hederacea
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+			LEBENSFORM: kreuzgegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: herzförmig
+			BLATT: nierenförmig
+		Kategorie: Blattrand
+			BLATT: gekerbt
+		Kategorie: Blattnerven
+			BLATT: gabelnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: violett
+			BLUETE: blau
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: röhrenförmig
+			BLUETE: glockenförmig
+		Kategorie: Anordnung
+			BLUETE: Wickel
+			BLUETE: Ähre
+	
+Caltha palustris
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: herzförmig
+			BLATT: nierenförmig
+		Kategorie: Blattrand
+			BLATT: gekerbt
+		Kategorie: Blattnerven
+			BLATT: kreuz-geadert
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+			BLUETE: radförmig sechszählig
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: einzeln
+
+Ranunculus repens
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: dreizählig gespalten
+			BLATT: gefiedert
+		Kategorie: Blattrand
+			BLATT: gezähnt
+			BLATT: gelappt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig dreizählig
+			BLUETE: radförmig vierzählig
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: einzeln
+	
+Anemone nemorosa
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: quirlständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: gefiedert
+		Kategorie: Blattrand
+			BLATT: gesägt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig sechszählig
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: einzeln
+	
+Nymphaea alba
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Wasserpflanze
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: rund
+			BLATT: oval
+			BLATT: nierenförmig
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+			BLATT: gekerbt
+		Kategorie: Blattnerven
+			BLATT: gabelnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+			BLUETE: gelb
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: einzeln
+	
+Papaver rhoeas
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: fiederschnittig
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: gesägt
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: rot
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vierzählig
+		Kategorie: Anordnung
+			BLUETE: einzeln
+	
+Stellaria holostea
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: scheidig verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: Dolde
+	
+Convallaria majalis
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: scheidig verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: parallelnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+		Kategorie: Blütenorientierung
+			BLUETE: nickend
+		Kategorie: Form/Symmetrie
+			BLUETE: glockenförmig
+		Kategorie: Anordnung
+			BLUETE: Traube
+	
+Viburnum opulus
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Strauch
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: dreizählig gespalten
+		Kategorie: Blattform
+			BLATT: oval
+			BLATT: lanzettlich
+			BLATT: lineal
+			BLATT: herzförmig
+		Kategorie: Blattrand
+			BLATT: gezähnt
+		Kategorie: Blattnerven
+			BLATT: gabelnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: Dolde
+	
+Campanula rotundifolia
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+			BLATT: lineal
+			BLATT: herzförmig
+			BLATT: nierenförmig
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+			BLATT: gekerbt
+			BLATT: gesägt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+			BLUETE: violett
+			BLUETE: blau
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+			BLUETE: nickend
+		Kategorie: Form/Symmetrie
+			BLUETE: trichterförmig
+		Kategorie: Anordnung
+			BLUETE: Traube
+	
+Veronica chamaedrys
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: gegenständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: oval
+		Kategorie: Blattrand
+			BLATT: gekerbt
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: blau
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vierzählig
+		Kategorie: Anordnung
+			BLUETE: Traube
+	
+Aegopodium podagraria L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: doppelt gefiedert
+			BLATT: dreifach gefiedert
+		Kategorie: Blattform
+			BLATT: oval
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: gesägt
+		Kategorie: Blattnerven
+			BLATT: in den Blattrand auslaufend
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: weiß
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig fünfzählig
+		Kategorie: Anordnung
+			BLUETE: Dolde
+	
+Anthoxanthum odoratum L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: scheidig verwachsen
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+			BLATT: parallelnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+			BLUETE: braun
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Anordnung
+			BLUETE: Ähre
+			BLUETE: Rispe 
+
+Campanula patula
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: rundspross
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+			LEBENSFORM: grundständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+			LEBENSFORM: gestielt
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: oval
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: parallelnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: violett
+			BLUETE: blau
+		Kategorie: Blütenorientierung
+			BLUETE: nickend
+		Kategorie: Form/Symmetrie
+			BLUETE: trichterförmig
+		Kategorie: Anordnung
+			BLUETE: Rispe 
+
 Cichorium intybus L.
 	Kategorie: Ganze Pflanze
 		Kategorie: Wuchsform
@@ -93,7 +683,7 @@ Dianthus carthusianorum L.
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: gegenständig
 		Kategorie: Blattgrund
@@ -122,7 +712,7 @@ Helichrysum arenarium (L.) Moench
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Blattgrund
 			LEBENSFORM: stengelumfassend
 	Kategorie: Blatt
@@ -152,7 +742,7 @@ Ranunculus acris L.
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: wechselständig
 			LEBENSFORM: grundständig
@@ -160,7 +750,7 @@ Ranunculus acris L.
 			LEBENSFORM: gestielt
 	Kategorie: Blatt
 		Kategorie: Gliederung
-			BLATT: dreizählig
+			BLATT: dreizählig gespalten
 			BLATT: handförmig gespalten
 		Kategorie: Blattrand
 			BLATT: gebuchtet
@@ -182,7 +772,7 @@ Dianthus deltoides L.
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: gegenständig
 		Kategorie: Blattgrund
@@ -210,7 +800,7 @@ Eupatorium cannabinum L.
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: gegenständig
 		Kategorie: Blattgrund
@@ -241,7 +831,7 @@ Echium vulgare L.
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: wechselständig
 			LEBENSFORM: grundständig
@@ -265,7 +855,7 @@ Quercus robur L.
 		Kategorie: Wuchsform
 			LEBENSFORM: Baum
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: wechselständig
 		Kategorie: Blattgrund
@@ -312,7 +902,7 @@ Armeria maritima subsp. elongata (Hoffm.) Bonnier
 		Kategorie: Wuchsform
 			LEBENSFORM: Kraut/Staude
 		Kategorie: Querschnitt der Sprossachse
-			LEBENSFORM: rund
+			LEBENSFORM: rundspross
 		Kategorie: Stellung an der Sprossachse
 			LEBENSFORM: grundständig
 	Kategorie: Blatt
