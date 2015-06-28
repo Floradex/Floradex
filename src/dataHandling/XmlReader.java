@@ -113,8 +113,7 @@ public class XmlReader{
 			plantNameToPlantMap.put(temp.getScientificName(), temp);
 			allPlants.add(temp);
 		}
-		JSONexporter exporter = new JSONexporter();
-		exporter.exportObjectToJSON(allPlants, "allPlants.json");
+		
 		
 		// Combine with attributes
 		File f = new File("input.txt"); // File to read
@@ -122,6 +121,10 @@ public class XmlReader{
 		// Usage
 		AttributeReader reader = new AttributeReader(plantNameToPlantMap,f);
 		reader.start();
+		
+		// export
+		JSONexporter exporter = new JSONexporter();
+		exporter.exportObjectToJSON(allPlants, "allPlants.json");
 		
 		// convert to list
 		LinkedList<Knoten> list = new LinkedList<Knoten>();
@@ -237,6 +240,17 @@ public class XmlReader{
 					String bloom = doc.getRootElement().getChild("bloom").getText();
 					String eatable = doc.getRootElement().getChild("eatable").getText();
 					String med = doc.getRootElement().getChild("med").getText();
+					String altlink = doc.getRootElement().getChild("altlink").getText();
+					String marker1_lat = doc.getRootElement().getChild("marker1_lat").getText();
+					String marker1_long = doc.getRootElement().getChild("marker1_long").getText();
+					String marker2_lat = doc.getRootElement().getChild("marker2_lat").getText();
+					String marker2_long = doc.getRootElement().getChild("marker2_long").getText();
+					String marker3_lat = doc.getRootElement().getChild("marker3_lat").getText();
+					String marker3_long = doc.getRootElement().getChild("marker3_long").getText();
+					String marker4_lat = doc.getRootElement().getChild("marker4_lat").getText();
+					String marker4_long = doc.getRootElement().getChild("marker4_long").getText();
+					String marker5_lat = doc.getRootElement().getChild("marker5_lat").getText();
+					String marker5_long = doc.getRootElement().getChild("marker5_long").getText();
 					
 					this.datas.get(plantName).addInformation("volksname", volksname);
 					this.datas.get(plantName).addInformation("geo", geo);
@@ -248,6 +262,18 @@ public class XmlReader{
 					this.datas.get(plantName).addInformation("bloom", bloom);
 					this.datas.get(plantName).addInformation("eatable", eatable);
 					this.datas.get(plantName).addInformation("med", med);
+					this.datas.get(plantName).addInformation("altlink", altlink);
+					this.datas.get(plantName).addInformation("marker1_lat", marker1_lat);
+					this.datas.get(plantName).addInformation("marker1_long", marker1_long);
+					this.datas.get(plantName).addInformation("marker2_lat", marker2_lat);
+					this.datas.get(plantName).addInformation("marker2_long", marker2_long);
+					this.datas.get(plantName).addInformation("marker3_lat", marker3_lat);
+					this.datas.get(plantName).addInformation("marker3_long", marker3_long);
+					this.datas.get(plantName).addInformation("marker4_lat", marker4_lat);
+					this.datas.get(plantName).addInformation("marker4_long", marker4_long);
+					this.datas.get(plantName).addInformation("marker5_lat", marker5_lat);
+					this.datas.get(plantName).addInformation("marker5_long", marker5_long);
+					
 					break;
 				default:
 					System.out.println("XmlReader: Please choose a mode when using readContent: \"catalog\", \"meta\", \"taxa\" or \"descriptions\"");

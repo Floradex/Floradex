@@ -11,7 +11,7 @@ import dataHandling.XmlReader;
 public class starter {
 
 	public static void main(String[] args) {
-		// Lade Katalog
+		// load catalog
 		XmlReader reader = null;
 		if(args.length < 1) {
 			String[] catalog = {"resources/catalog.xml"};

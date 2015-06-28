@@ -64,7 +64,7 @@ public class Data {
 
 	
 	public String getSampleId() {
-		return this.information.get("SampleID").split("/")[this.information.get("SampleID").split("/").length - 1]; // Parse sampleid		
+		return this.information.get("SampleID").split("/")[this.information.get("SampleID").split("/").length - 1]; // Parse sampleid
 	}
 	
 	String[] getURLsArray() {
@@ -120,7 +120,17 @@ public class Data {
 		String bloom = this.information.get("bloom");
 		String eatable = this.information.get("eatable");
 		String med = this.information.get("med");
-		
+		String altlink = this.information.get("altlink");
+		String marker1_lat = this.information.get("marker1_lat");
+		String marker1_long = this.information.get("marker1_long");
+		String marker2_lat = this.information.get("marker2_lat");
+		String marker2_long = this.information.get("marker2_long");
+		String marker3_lat = this.information.get("marker3_lat");
+		String marker3_long = this.information.get("marker3_long");
+		String marker4_lat = this.information.get("marker4_lat");
+		String marker4_long = this.information.get("marker4_long");
+		String marker5_lat = this.information.get("marker5_lat");
+		String marker5_long = this.information.get("marker5_long");
 		
 		Plant ret = new Plant(SampleID, title, description,
 				BasisOfRecord, InstitutionCode,
@@ -132,7 +142,10 @@ public class Data {
 				t_subfamily, t_supertribe, t_tribe,
 				t_subtribe, t_genus, t_section,
 				volksname, geo, distribution,
-				sun, water, winter, size, bloom, eatable, med);
+				sun, water, winter, size, bloom, eatable, med, altlink,
+				marker1_lat, marker1_long, marker2_lat, marker2_long,
+				marker3_lat, marker3_long, marker4_lat, marker4_long,
+				marker5_lat, marker5_long);
 		//ret.print();
 		return ret;
 	}

@@ -20,7 +20,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class ThumbnailMaker {
-	static float[] standartScales = new float[]{25,50,100,200}; // around 40KB per image
+	static float[] standartScales = new float[]{25,50,100,200,240}; // around 40KB per image
 	static File STANDART_IMAGE = new File("resources/images/standardImages/standard.png");
 	static int DOWNLOAD_TRYS = 5;
 	

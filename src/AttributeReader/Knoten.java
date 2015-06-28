@@ -103,9 +103,4 @@ public class Knoten {
 	public void setParent(Knoten parent) {
 		this.parent = parent;
 	}
-
-	
-	
-	
-
 }

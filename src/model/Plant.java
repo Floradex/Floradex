@@ -1,5 +1,11 @@
 package model;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+import AttributeReader.Knoten;
+
 public class Plant {
 		private String SampleID; // bgbm information
 		// catalog
@@ -32,20 +38,40 @@ public class Plant {
 		private String t_genus;
 		private String t_section;
 		
-		private String descriptionText;
-		String volksname;
-		String geo;
-		String distribution;
-		String sun;
-		String water;
-		String winter;
-		String size;
-		String bloom;
-		String eatable;
-		String med;
+		private String volksname;
+		private String geo;
+		private String distribution;
+		private String sun;
+		private  String water;
+		private  String winter;
+		private  String size;
+		private  String bloom;
+		private  String eatable;
+		private  String med;
+		private  String altlink;
+		private  String marker1_lat;
+		private  String marker1_long;
+		private  String marker2_lat;
+		private  String marker2_long;
+		private  String marker3_lat;
+		private  String marker3_long;
+		private  String marker4_lat;
+		private  String marker4_long;
+		private  String marker5_lat;
+		private  String marker5_long;
+		
+		
+		public Map<String, String> merkmale =  new HashMap<String, String>();
 		
 		public Plant() {
 			// Empty plant
+		}
+		
+		
+		public void addMerkmal(String merkmal, String parent) {
+			if (merkmal != null && !merkmale.containsKey(parent)) {
+				merkmale.put(parent, merkmal);
+			}
 		}
 		
 		public Plant(String sampleID, String title, String description,
@@ -58,7 +84,10 @@ public class Plant {
 				String t_subfamily, String t_supertribe, String t_tribe,
 				String t_subtribe, String t_genus, String t_section,
 				String volksname, String geo, String distribution,
-				String sun, String water, String winter, String size, String bloom, String eatable, String med) {
+				String sun, String water, String winter, String size, String bloom, String eatable, String med, String altlink,
+				String marker1_lat, String marker1_long, String marker2_lat, String marker2_long,
+				String marker3_lat, String marker3_long, String marker4_lat, String marker4_long,
+				String marker5_lat, String marker5_long) {
 			super();
 			this.SampleID = sampleID;
 			this.title = title;
@@ -95,6 +124,17 @@ public class Plant {
 			this.bloom = bloom;
 			this.eatable = eatable;
 			this.med = med;
+			this.altlink = altlink;
+			this.marker1_lat = marker1_lat;
+			this.marker1_long = marker1_long;
+			this.marker2_lat = marker2_lat;
+			this.marker2_long = marker2_long;
+			this.marker3_lat = marker3_lat;
+			this.marker3_long = marker3_long;
+			this.marker4_lat = marker4_lat;
+			this.marker4_long = marker4_long;
+			this.marker5_lat = marker5_lat;
+			this.marker5_long = marker5_long;
 		}
 
 
