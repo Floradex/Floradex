@@ -8,6 +8,8 @@ Fachbegriffe und den trockenen wissenschaftlichen Inhalt binden wir direkt in di
 
 Die Webapp funktioniert am besten mit Chrome oder Safari bei einer Auflösung von mindestens 7,9"/20,1 cm Diagonale.
 
+Unsere Software besteht aus zwei Teilen. Einem Programm aus mehreren Modulen zur Beschaffuung der unterschiedlichen Daten und einer Webapp, die diese Informationen verwendet.
+
 LIZENZ
 
 Für den Quellcode dieses Projekts gilt die GNU General Public Licence 2.0
