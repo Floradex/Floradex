@@ -42,7 +42,6 @@ public class AttributeReader {
 	
 	Knoten lastKnoten;
 	
-	// example of usage
 //	public static void main(String[] args) {
 //		// File to read
 //				File f = new File("input.txt");
@@ -100,6 +99,7 @@ public class AttributeReader {
 				 this.printOrLook(outputDict, 1);
 			
 		}
+//		
 		
 	}
 	
@@ -126,7 +126,7 @@ public class AttributeReader {
 		else {
 			int count = line.length() - line.replace("\t", "").length();
 			
-			Knoten tempKnoten = new Knoten(line); // aktueller knoten	
+			Knoten tempKnoten = new Knoten(line); // current node
 			
 			
 			if (count == 1) { // first layer
@@ -141,7 +141,7 @@ public class AttributeReader {
 				currentTab = 1;
 				globalWeight = 0;
 				lastKnoten = tempKnoten;
-			} else { // all other layers
+			} else { // other layers
 				if (count == currentTab + 1) { // next layer
 					if (log)System.out.println(" next ");
 				} else if (count == currentTab) { // same layer
@@ -154,7 +154,7 @@ public class AttributeReader {
 					int toGoBack = currentTab - count;
 					if (log) System.out.println("goBack" +toGoBack);
 					for (int i = 0; i <= toGoBack; i++) {
-						if (lastKnoten.getType() == KnotenType.MERKMAL) { // gewicht senken
+						if (lastKnoten.getType() == KnotenType.MERKMAL) { // decrease weight
 							this.globalWeight--;
 							//System.out.println("-" + globalWeight);
 						}
@@ -166,13 +166,13 @@ public class AttributeReader {
 				}
 					if (log) System.out.println("trying to get " +  tempKnoten.getName() + " from " + lastKnoten);
 					Knoten d = lastKnoten.getChildren().get(tempKnoten.getName());
-					if (d == null) { // neuer knoten
+					if (d == null) { // new node
 						if (log) System.out.println(tempKnoten.getName() + " added as child to " + lastKnoten.getName() +" into dict " + lastKnoten.getChildren());
 						tempKnoten.setParent(lastKnoten);
 						//System.out.println("setting parent " + lastKnoten.getName());
 						lastKnoten.getChildren().put(tempKnoten.getName(), tempKnoten);
 						//currentDict = tempKnoten.getChildren();
-					} else { // existierender knoten
+					} else { // existing node
 						if (log) System.out.println(" loadKnoten: " + d.getName());
 						tempKnoten = d;
 					}
@@ -185,7 +185,7 @@ public class AttributeReader {
 						if (log) System.out.println("addingPlant " + tempKnoten.getName());
 						tempKnoten.setWeight(globalWeight);
 						tempKnoten.getPlantIds().add(currentPlant.getSampleID());
-						currentPlant.addMerkmal(tempKnoten.getName(), tempKnoten.getParent().getName()); // add trait to plant
+						currentPlant.addMerkmal(tempKnoten.getName(), tempKnoten.getParent().getName()); // add merkmal to plant
 					}
 					
 				
@@ -223,6 +223,7 @@ public class AttributeReader {
 				alphaOnly = alphaOnly + ".png";
 			
 				Path path = Paths.get(dir + "/" + alphaOnly);
+
 				
 				final Path tmp = path.getParent();
 				if (tmp != null)

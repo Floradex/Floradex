@@ -19,6 +19,7 @@
     <script src='lib/lodash/lodash.min.js'></script>
     <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
     <script src='lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 </head>
 
 <body ng-app="floradex" ng-controller="MainCtrl">
@@ -40,19 +41,19 @@
                 <div class="row">
                     <div class="col vorschau-div color-col-0">
                         <div ng-repeat="attribute in vorschauLebensform">
-                            <img src="resources/images/default/empty_ganz.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
+                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
                         </div>
                         <img src="resources/images/default/empty_ganz.png" class="vorschau-item-large" style="z-index= 1;">
                     </div>
                     <div class="col vorschau-div color-col-2">
                         <div ng-repeat="attribute in vorschauBlatt">
-                            <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }" style="padding:1.5em;">
+                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
                         </div>
-                        <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" style="padding:1.5em; z-index=1;">
+                        <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" style=" z-index=1;">
                     </div>
                     <div class="col vorschau-div color-col-1">
                         <div ng-repeat="attribute in vorschauBluete">
-                            <img src="resources/images/default/empty_bluete.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
+                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
                         </div>
                         <img id="vorschau-bild-mitte" src="resources/images/default/empty_bluete.png" class="vorschau-item-large" style="z-index= 1;">
                     </div>
@@ -67,7 +68,7 @@
                 <script id="my-popover.html" type="text/ng-template">
                     <ion-popover-view class="floracolor-yellow" style="height: 160px;
                                                                       width: {{(currentPopoverMenuItem.children.length * 75 < 400) ? 400 : (currentPopoverMenuItem.children.length * 75) + 'px' }};">
-                        <ion-header-bar class="popover-header floracolor-yellow bar-top-no-border ">
+                        <ion-header-bar class="popover-header floracolor-yellow-darker bar-top-no-border ">
                             <div class="popover-header-title flora-text-size-large">{{currentPopoverMenuItem.name}}</div>
                             <div class="popover-header-desc"> {{popoverTextForMerkmal(currentPopoverMenuItem.name)}}</div>
                         </ion-header-bar>
@@ -114,7 +115,7 @@
             <ion-content class="floracolor-ironsight-grey sidebar-has-footer">
                 <ion-scroll delegate-handle="resultsScrollView" direction="y" class="result-scroller center" ng-style="">
                     <div ng-class="(plant.isShownInModalView == true) ? 'photo photo-sidebar-selected-bg' : 'photo'" collection-repeat="plant in results" item-height="resultSettings.size + padding" item-width="resultSettings.size + padding">
-                        <img ng-src="resources/images/thumbnails/{{plant.SampleID}}-{{resultSettings.size}}.png" err-src="resources/images/default/thumbnail-{{resultSettings.size}}.png" ng-click="showImage(plant)">
+                        <img class="photo-center" ng-src="resources/images/thumbnails/{{plant.SampleID}}-{{resultSettings.size}}.png" err-src="resources/images/default/thumbnail-{{resultSettings.size}}.png" ng-click="showImage(plant)">
                         <div ng-if="resultMode == 'SearchResults'" class="result-plant-name"> {{plant.foundProperty | limitTo:20 }} </div>
                     </div>
                 </ion-scroll>
@@ -148,7 +149,7 @@
                     <div class="list list-inset search-input">
                         <label class="item item-input">
                             <i class="icon ion-search placeholder-icon"></i>
-                            <input type="text" ng-model="search.text" ng-model-options="{ getterSetter: true }" placeholder="Gib hier den Namen der Pflanze, ihre Art, ihr Blalablubb an">
+                            <input type="text" ng-model="search.text" ng-model-options="{ getterSetter: true }" placeholder="z.B. Wasserdorst, Europa, Helichrysum, usw.">
                         </label>
                     </div>
                 </ion-content>
@@ -164,16 +165,19 @@
         <script id="image-modal.html" type="text/ng-template">
             <ion-modal-view style="width: calc(100% - 250px) !important; height: calc(100% - 75px); top: 0%; left: 0%; right: 250px; bottom: 75px;" class="modal-high">
                 <ion-header-bar class="bar-top-no-border floracolor-yellow">
-                    <h1 class="title">{{currentMoreInfoPlant.volksname}} - {{currentMoreInfoPlant.ScientificName}}</h1>
-                    <div class="buttons">
+                    <div class="buttons header-subtitle" ng-if="currentMoreInfoPlant.t_genus">
+                        {{currentMoreInfoPlant.t_subclass}} > {{currentMoreInfoPlant.t_order}} > {{currentMoreInfoPlant.t_superorder}} > {{currentMoreInfoPlant.t_family}} > {{currentMoreInfoPlant.t_genus}}
+                    </div>
+                    <h1 class="header-left">{{currentMoreInfoPlant.volksname}} - {{currentMoreInfoPlant.ScientificName}}</h1>
+                    <div class="buttons header-right">
                         <!-- <button class="button button-clear icon ion-android-print button-large" ng-click="printIt();" />-->
-                        <button class="button button-clear icon button-large" ng-class="(herbariumContains(currentMoreInfoPlant.SampleID)) ? 'ion-ios-star' : 'ion-ios-star-outline'" ng-click="putPlantIntoHerbariumOrRemove(currentMoreInfoPlant.SampleID)" />
-                        <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="closeModal()" />
+                        <button class="button button-clear icon button-large button-color margin-top" ng-class="(herbariumContains(currentMoreInfoPlant.SampleID)) ? 'ion-ios-star' : 'ion-ios-star-outline'" ng-click="putPlantIntoHerbariumOrRemove(currentMoreInfoPlant.SampleID)" />
+                        <button class="button button-clear icon ion-ios-close-empty round-bg button-color margin-right margin-top" ng-click="closeModal()" />
                     </div>
                 </ion-header-bar>
                 <ion-content class="floracolor-yellow more-infos">
                     <div class="row">
-                        <div class="col grayscale">
+                        <div class="col mi-col-upper grayscale">
                             <ui-gmap-google-map control="map.control" center='map.center' zoom='map.zoom' options='map.options'>
                                 <ui-gmap-marker ng-if="map.marker1 != null" coords="map.marker1" idkey="1">
                                 </ui-gmap-marker>
@@ -187,13 +191,13 @@
                                 </ui-gmap-marker>
                             </ui-gmap-google-map>
                         </div>
-                        <div class="col mi-col-upper">
+                        <div class="col mi-col-upper mi-col-upper-hover">
                             <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-240.png" ng-click="openFullscreenModal()">
-                            <i class="icon ion-arrow-expand more-infos-enlarge-icon" ng-click="openFullscreenModal()"></i>
+                            <i class="icon ion-arrow-expand more-infos-enlarge-icon round-bg" ng-click="openFullscreenModal()"></i>
                             </img>
                         </div>
                         <div class="col mi-col-upper">
-                            <img class="image" ng-src="resources/images/thumbnails/{{currentMoreInfoPlant.SampleID}}-240.png" />
+                            <img class="image" ng-src="resources/images/blueten/{{currentMoreInfoPlant.SampleID}}.png" />
                         </div>
                     </div>
                     <div class="row">
@@ -295,7 +299,10 @@
         <script id="flodarex-intro.html" type="text/ng-template">
             <ion-modal-view style="width: calc(100% - 250px) !important; height: 100%; top: 0%; left: 0%; right: 250px; bottom: 0%;">
                 <ion-content class="floracolor-main" ng-click="hideFloradexOverlay();closeDrawer();">
-                    <img ng-src="resources/images/default/floradex.png" class="floradex-image" />
+                    <img ng-src="resources/images/default/floradex.png" class="floradex-image"></img>
+                    <div class="our-names">
+                        {{ getAllNamesInRandom() }}
+                    </div>
                 </ion-content>
             </ion-modal-view>
         </script>
@@ -323,7 +330,7 @@
                     <ion-item class="no-style-list flora-text-size-large" ng-click="herbariumShow();"><i class="icon ion-ios-star drawer-icon"></i>
                         <div class="drawer-text">Mein Herbarium</div>
                     </ion-item>
-                    <ion-item ng-if="resultMode == 'Baukasten'" class="no-list-border flora-text-size-large" ng-click="baukastenRemoveAllFilters()"><i class="icon ion-close drawer-icon"></i>
+                    <ion-item ng-if="resultMode == 'Baukasten' && !isModalFloradexImageOpen()" class="no-list-border flora-text-size-large" ng-click="baukastenRemoveAllFilters()"><i class="icon ion-close drawer-icon"></i>
                         <div class="drawer-text">Alle Filter löschen</div>
                     </ion-item>
                 </ion-list>
@@ -344,11 +351,11 @@
                     <ion-scroll zooming="true" direction="xy" scrollbar-x="true" scrollbar-y="true" delegate-handle="fullscreenScrollview" class="ion-scroll-height-fix" min-zoom="0.3">
                         <img ng-src="{{ (currentMoreInfoPlant.altlink) ? currentMoreInfoPlant.altlink : currentMoreInfoPlant.associatedMedia}}" ng-click="hideFullscreenImageOverlay()">
                     </ion-scroll>
-                        <i class="icon ion-arrow-shrink fullscreen-image-text-bubble" ng-click="hideFullscreenImageOverlay()"> </i>
+                    <i class="icon ion-arrow-shrink fullscreen-image-text-bubble round-bg" ng-click="hideFullscreenImageOverlay()"> </i>
                 </ion-content>
             </ion-modal-view>
         </script>
-	</ion-side-menus>
+    </ion-side-menus>
 </body>
 
 </html>

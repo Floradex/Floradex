@@ -27,12 +27,12 @@ public class ThumbnailMaker {
 	static boolean DEBUG = false;
 
 	// Code for download manually .move image to originalImages/ and put BGBG code here
-//	public static void main(String[] args) {
-//		ThumbnailMaker maker = new ThumbnailMaker();
-//		//String testImage = "http://ww2.bgbm.org/herbarium/images/B/-W/06/96/B_-W_06960%20-01%200.jpg";
-//		File testFile = new File("resources/images");
-//		maker.downloadFromUrlIntoFile(null, testFile, "BGT0000308");
-//	}
+	public static void main(String[] args) {
+		ThumbnailMaker maker = new ThumbnailMaker();
+		//String testImage = "http://ww2.bgbm.org/herbarium/images/B/-W/06/96/B_-W_06960%20-01%200.jpg";
+		File testFile = new File("resources/images");
+		maker.downloadFromUrlIntoFile(null, testFile, "BGT0001414");
+	}
 	
 	public void downloadFromUrlIntoFile(String url, File folder, String filename) {
 		this.downloadFromUrlIntoFile(url, folder, filename, standartScales);
@@ -60,11 +60,15 @@ public class ThumbnailMaker {
 		BufferedImage bufferedImage = null;
 		
 		// download original file
+		File check = new File(originalImageFolder.getAbsolutePath() + "/" + filename + ".jpg");
+		if (!check.exists()) {
 		if (bufferedImage == null && url != null) {
+			
 			try {
 				saveOriginalImage(originalImageFolder.getAbsolutePath() + "/" + filename + ".jpg", new URL(url.replace(" ", "%20")));
 			} catch (MalformedURLException e1) {
 				System.err.println("Thumbnailmaker: MalformedURLException caused by " + e1.getMessage());
+			}
 			}
 		}
 		

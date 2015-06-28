@@ -13,6 +13,7 @@ public class Downloader {
 	private final String USER_AGENT = "Mozilla/5.0";
 	public boolean fullInfo = false;
 	
+	
 	public InputStream sendGet(String id) throws Exception {
 			String returnValue = "";
 		

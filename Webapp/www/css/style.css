@@ -8,6 +8,13 @@ html * {
     Colors
 
 */
+
+.our-names {
+    position: absolute;
+    left: 10%;
+    color: white;
+    font-size: 15px;
+}
  
 .menu-not-clickable {
      pointer-events: none;
@@ -51,7 +58,11 @@ html * {
 }
 
 .floracolor-yellow {
-    background-color: #F7D031;
+    background-color: #D6C45E;
+}
+
+.floracolor-yellow-darker {
+    background-color: #C4B456;
 }
 
 .floradex-grey {
@@ -152,15 +163,29 @@ html * {
     width: 100px;
 }*/
 
-.vorschau-item-large {
-	/*-moz-transform:translate(0px,-20%);*/ /* Firefox 3.6 Firefox 4*/
-    position: absolute;
-    top: 30px;
-    left: 5%;
-    max-width: 90%;
-	/*max-width: 200px;*/
-    padding-top: 15%;
-}
+/*@media (max-device-width: 1280px){
+	.vorschau-item-large {*/
+		/*-moz-transform:translate(24%,-5%);*/ /* Firefox 3.6 Firefox 4*/
+		/*-webkit-transform:translate(5%,0%);*/ /* Chrome*/
+		/*position: absolute;
+		top: 30px;
+		left: 5%;
+		max-width: 200px;
+		padding-top: 15%;
+	}
+}*/
+
+/*@media (min-device-width: 1281px){*/
+	.vorschau-item-large {
+		/*-moz-transform:translate(24%,-5%);*/ /* Firefox 3.6 Firefox 4*/
+		/*-webkit-transform:translate(5%,0%);*/ /* Chrome*/
+		position: absolute;
+		top: 30px;
+		left: 5%;
+		max-width: 90%;
+		padding-top: 15%;
+	}
+/*}*/
 
 .vorschau-div {
     position: relative;
@@ -216,7 +241,7 @@ html * {
 }
 
 .photo-selected {
-    background-color: #D4B349;
+    background-color: #D6C45E;
 }
 
 .second-row-text {
@@ -324,7 +349,7 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 }
 
 .flora-menu .floramenu-li-item-highlighted {
-    background-color: #F7D031;
+    background-color:  #D6C45E;
     color: white;
 }
 /*.flora-menu .floramenu-li-item-selected {
@@ -357,7 +382,7 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 
 .flora-menu li:hover {
     color: white;
-    background-color: #F7D031;
+    background-color: #D6C45E; 
     border: 0;
     cursor: pointer;
 }
@@ -366,6 +391,11 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     height: 57px;
     width: 57px;
 }
+
+.second-row-image:hover {
+
+}
+
 
 .inverted {
     -webkit-filter: invert(1);
@@ -397,13 +427,6 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     color: black;
     width: 60px;
 
-}
-
-.flora-menu-mi li:hover {
-    color: white;
-    background-color: #F7D031;
-    border: 0;
-    cursor: pointer;
 }
 
 .flora-menu-mi .submenu {
@@ -509,12 +532,18 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 /* Sidebar content */
 
 .photo {
-    display: flex;
+    position: relative;
+    /*display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 5px;
+    justify-content: center;*/
     cursor: pointer;
     cursor: hand;
+}
+
+.photo-center {
+    position: absolute;
+    margin-left: 2.5px;
+    margin-top: 2.5px;
 }
 
 .photo-sidebar-selected-bg {
@@ -661,16 +690,29 @@ Modal Overlay more info view tecnical stuff
     position: absolute;
     bottom: 0.6em;
     right: 1.3em;
-    color: black;
-    background-color: white;
-    padding: 5px;
-    border-radius: 25px;
-    padding: 10px;
-    width: 40px;
-    height: 40px;
+    color: black
     z-index: 999;
     text-align: center;
 }
+
+.round-bg {
+    background-color: white !important;
+    border-radius: 25px;
+    padding: 10px;
+    width: 35px;
+    height: 35px;
+}
+.button-color {
+    color: black !important;
+}
+
+.margin-right {
+        margin-right: 0.6em;
+}
+.margin-top {       
+ margin-top: 0.2em;
+}
+
 
 .more-infos {
     -moz-user-select: text !important;
@@ -707,7 +749,6 @@ Modal Overlay more info view tecnical stuff
 }
 
 .more-infos .image {
-    padding: 5px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -717,10 +758,28 @@ Modal Overlay more info view tecnical stuff
         position: relative;
 }
 
-.more-infos .mi-col-upper:hover {
+.more-infos .mi-col-upper-hover:hover {
     cursor: pointer;
     cursor: hand;
     background-color: #E2CC8B;
+}
+
+.header-left {
+    position: absolute !important;
+    left:0.6em;
+    top: -0.6em;
+}
+
+.header-right {
+    position: absolute !important;
+    right: 0;
+}
+
+.header-subtitle {
+    position: absolute;
+    bottom: -0.3em;
+    left: 1.3em;
+    font-size: 10px;
 }
 
 .fullscreen-image-text-bubble {

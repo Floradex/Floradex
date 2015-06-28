@@ -27,11 +27,11 @@ public class Knoten {
 	public Knoten(String line) {
 		super();
 		line = line.trim();
-		if (line.startsWith("Kategorie:")) { // Kategorie
+		if (line.startsWith("Kategorie:")) { // categorie
 			line = line.replace("Kategorie:", "");
 			setType(KnotenType.KATEGORIE);
 			setName(line);
-		} else { // Merkmal
+		} else { // trait
 			setType(KnotenType.MERKMAL);
 			
 			for (MerkmalPosition c : MerkmalPosition.values()) {
@@ -103,4 +103,9 @@ public class Knoten {
 	public void setParent(Knoten parent) {
 		this.parent = parent;
 	}
+
+	
+	
+	
+
 }

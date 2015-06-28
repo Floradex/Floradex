@@ -64,7 +64,7 @@ public class Data {
 
 	
 	public String getSampleId() {
-		return this.information.get("SampleID").split("/")[this.information.get("SampleID").split("/").length - 1]; // Parse sampleid
+		return this.information.get("SampleID").split("/")[this.information.get("SampleID").split("/").length - 1]; // Parse sampleid		
 	}
 	
 	String[] getURLsArray() {
