@@ -33,6 +33,10 @@
          -->
         <ion-side-menu-content>
             <ion-content class="bg-gradient-meh" scroll="false">
+                <img ng-src="resources/images/default/floradex.png" class="floradex-image-translucent" />
+                <div class="main-content-title" >
+                    {{ getCurrentTitle(); }}
+                </div>
                 <div class="row">
                     <div class="col vorschau-div color-col-0">
                         <div ng-repeat="attribute in vorschauLebensform">
@@ -62,12 +66,13 @@
                 -->
                 <script id="my-popover.html" type="text/ng-template">
                     <ion-popover-view class="floracolor-yellow" style="height: 160px;
-                                                                      width: {{(currentPopoverMenuItem.children.length * 75) + 'px' }};">
+                                                                      width: {{(currentPopoverMenuItem.children.length * 75 < 400) ? 400 : (currentPopoverMenuItem.children.length * 75) + 'px' }};">
                         <ion-header-bar class="popover-header floracolor-yellow bar-top-no-border ">
-                            <div class="title flora-text-size-large">{{currentPopoverMenuItem.name}}</div>
+                            <div class="popover-header-title flora-text-size-large">{{currentPopoverMenuItem.name}}</div>
+                            <div class="popover-header-desc"> {{popoverTextForMerkmal(currentPopoverMenuItem.name)}}</div>
                         </ion-header-bar>
                         <ion-content>
-                            <ion-scroll direction="y" class="popover-scroller">
+                            <ion-scroll delegate-handle="popoverScroller" direction="y" class="popover-scroller">
                                 <div ng-class="(child.selected == true) ? 'popover-photo' : 'popover-photo popover-photo-hoverble'" collection-repeat="child in currentPopoverMenuItem.children" item-height="140" item-width="75" ng-click="menuSelectItem(child, currentPopoverMenuItem, currentPopoverMenuSuperItem)">
                                     <img ng-class="(child.selected == true) ? 'second-row-image' : (currentPopoverMenuItem.name != 'Farbe') ? 'second-row-image inverted' : 'second-row-image'" ng-src="resources/images/menu/{{replaceAllSpecialCharactersInString(child.name)}}.png">
                                     <br>
@@ -84,7 +89,7 @@
 
 
                 -->
-                <div ng-class="(resultMode != 'Baukasten') ? 'menu-not-clickable flora-menu bg-gradient-dark' : 'flora-menu bg-gradient-dark'">
+                <div ng-class="(isMoreInfosViewOpen() || resultMode == 'MeinHerbarium') ? 'menu-not-clickable flora-menu bg-gradient-dark' : 'flora-menu bg-gradient-dark'">
                     <div class="submenu" ng-repeat="superMenuData in menuData">
                         <ul>
                             <li ng-class="(data.hightlighted == true) ? (data.selected == true) ? 'floramenu-li-item-highlighted' : 'floramenu-li-item-highlighted' : (data.selected == true) ? 'floramenu-li-item-selected-{{$parent.$index}}' : ''" ng-repeat="data in superMenuData.children" ng-click="showMenuPopover($event, data, superMenuData)">
@@ -116,10 +121,11 @@
             </ion-content>
             <ion-footer-bar class="floradex-dark-grey bar-top-no-border sidebar-footer" ng-click="toggleDrawer()">
                 <button class="sidebar-above-header-button button button-clear icon ion-chevron-up"></button>
-                <div ng-if="resultMode == 'Baukasten'" class="text flora-text-size-large"><i class="icon ion-search sidebar-footer-magnifier"></i> {{countOfResults}} Ergebnisse</div>
+                <div ng-if="resultMode == 'Baukasten'" class="text flora-text-size-large sidebar-footer-text">
+                    <i class="icon ion-leaf flip sidebar-footer-magnifier"></i> {{countOfResults}} Pflanzen</div>
                 <div ng-if="resultMode == 'MeinHerbarium'" class="text flora-text-size-large">Mein Herbarium</div>
-                <div ng-if="resultMode == 'SearchResults'" class="text flora-text-size-large">{{countOfResults}} Ergebnisse</div>
-                <div ng-if="resultMode == 'FindeMerkmale'" class="text">Bestimme die Merkmale</div>
+                <div ng-if="resultMode == 'SearchResults'" class="text flora-text-size-large">
+                    <i class="icon ion-ios-search-strong sidebar-footer-magnifier"></i> {{countOfResults}} Pflanzen</div>
             </ion-footer-bar>
         </ion-side-menu>
         <!-- 
@@ -160,7 +166,7 @@
                 <ion-header-bar class="bar-top-no-border floracolor-yellow">
                     <h1 class="title">{{currentMoreInfoPlant.volksname}} - {{currentMoreInfoPlant.ScientificName}}</h1>
                     <div class="buttons">
-                        <button class="button button-clear icon ion-android-print button-large" ng-click="" />
+                        <!-- <button class="button button-clear icon ion-android-print button-large" ng-click="printIt();" />-->
                         <button class="button button-clear icon button-large" ng-class="(herbariumContains(currentMoreInfoPlant.SampleID)) ? 'ion-ios-star' : 'ion-ios-star-outline'" ng-click="putPlantIntoHerbariumOrRemove(currentMoreInfoPlant.SampleID)" />
                         <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="closeModal()" />
                     </div>
@@ -168,7 +174,17 @@
                 <ion-content class="floracolor-yellow more-infos">
                     <div class="row">
                         <div class="col grayscale">
-                            <ui-gmap-google-map center='map.center' zoom='map.zoom' options='map.options'>
+                            <ui-gmap-google-map control="map.control" center='map.center' zoom='map.zoom' options='map.options'>
+                                <ui-gmap-marker ng-if="map.marker1 != null" coords="map.marker1" idkey="1">
+                                </ui-gmap-marker>
+                                <ui-gmap-marker ng-if="map.marker2 != null" coords="map.marker2" idkey="1">
+                                </ui-gmap-marker>
+                                <ui-gmap-marker ng-if="map.marker3 != null" coords="map.marker3" idkey="1">
+                                </ui-gmap-marker>
+                                <ui-gmap-marker ng-if="map.marker4 != null" coords="map.marker4" idkey="1">
+                                </ui-gmap-marker>
+                                <ui-gmap-marker ng-if="map.marker5 != null" coords="map.marker5" idkey="1">
+                                </ui-gmap-marker>
                             </ui-gmap-google-map>
                         </div>
                         <div class="col mi-col-upper">
@@ -188,11 +204,11 @@
                         </div>
                         <div class="col mi-col-lower">
                             <div class="meta-holder">
-                                <i ng-if="currentMoreInfoPlant.sun >= 1" class="icon ion-ios-partlysunny more-infos-fat-icon"></i>
-                                <div class="meta-text"> 
-                                    <i ng-if="currentMoreInfoPlant.sun >= 1" class="icon ion-ios-sunny-outline"></i>
-                                    <i ng-if="currentMoreInfoPlant.sun >= 2" class="icon ion-ios-sunny-outline "></i>
-                                    <i ng-if="currentMoreInfoPlant.sun >= 3" class="icon ion-ios-sunny-outline "></i>
+                                <i class="icon ion-ios-sunny-outline more-infos-fat-icon"></i>
+                                <div class="meta-text">
+                                    <div ng-if="currentMoreInfoPlant.sun == 1">Schatten</div>
+                                    <div ng-if="currentMoreInfoPlant.sun == 2">Halbschatten</div>
+                                    <div ng-if="currentMoreInfoPlant.sun == 3">Sonne</div>
                                 </div>
                             </div>
                         </div>
@@ -214,17 +230,17 @@
                         </div>
                         <div class="col">
                             <div class="meta-holder">
-                                <i class="icon ion-umbrella more-infos-fat-icon"></i>
+                                <i class="icon ion-waterdrop more-infos-fat-icon"></i>
                                 <div class="meta-text">
-                                <i ng-if="currentMoreInfoPlant.water >= 1" class="icon ion-waterdrop"></i>
-                                    <i ng-if="currentMoreInfoPlant.water >= 2" class="icon ion-waterdrop "></i>
-                                    <i ng-if="currentMoreInfoPlant.water >= 3" class="icon ion-waterdrop"></i>
+                                    <div ng-if="currentMoreInfoPlant.water == 1">feucht</div>
+                                    <div ng-if="currentMoreInfoPlant.water == 2">mittelfeucht</div>
+                                    <div ng-if="currentMoreInfoPlant.water == 3">trocken</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="meta-holder">
-                                <i class="icon ion-pizza more-infos-fat-icon"></i> 
+                                <i class="icon ion-pizza more-infos-fat-icon"></i>
                                 <div class="meta-text"> {{ (currentMoreInfoPlant.eatable != '') ? currentMoreInfoPlant.eatable : "nicht essbar" }}
                                 </div>
                             </div>
@@ -249,7 +265,7 @@
                             <div class="meta-holder">
                                 <i class="icon ion-medkit more-infos-fat-icon"></i>
                                 <div class="meta-text">
-                                {{ (currentMoreInfoPlant.med != '') ? currentMoreInfoPlant.med : "keine" }}
+                                    {{ (currentMoreInfoPlant.med != '') ? currentMoreInfoPlant.med : "keine" }}
                                 </div>
                             </div>
                         </div>
@@ -258,7 +274,7 @@
                 <div ng-if="currentMoreInfoPlant.isShownInModalView" class="flora-menu-mi">
                     <div class="submenu" ng-repeat="superMenuData in menuData">
                         <ul>
-                            <li ng-repeat="data in superMenuData.children">   
+                            <li ng-repeat="data in superMenuData.children">
                                 <img class="second-row-image" ng-src="resources/images/menu/{{currentPlantContainsMerkmalImageName(currentMoreInfoPlant, data)}}.png">
                                 <div class="second-row-text-mi"> {{(data.name == 'fragezeichen') ? 'Ich weiß nicht' : (currentPlantContainsMerkmalImageName(currentMoreInfoPlant, data) != 'empty') ? currentPlantMerkmalName(currentMoreInfoPlant, data) : '' }}</div>
                             </li>
@@ -291,12 +307,24 @@
         <drawer side="right">
             <ion-content class="floradex-dark-grey">
                 <ion-list class="main-menu-list">
-                    <ion-item class="no-style-list" ng-click="baukastenEnable();">
-                        <i class="icon ion-ios-search-strong"></i> Pflanze bestimmen</ion-item>
-                    <ion-item class="no-style-list" ng-click="wortsucheEnable();"><i class="icon ion-arrow-right-a"></i> Wort suchen</ion-item>
+                    <ion-item class="no-style-list" ng-click="toggleDrawer();">
+                        <button class="sidebar-above-list-button button button-clear icon ion-chevron-down"></button>
+                    </ion-item>
+                    <ion-item class="no-style-list flora-text-size-large" ng-click="baukastenEnable();">
+                        <i class="icon ion-leaf drawer-icon flip"></i>
+                        <div class="drawer-text">Pflanzenbestimmung</div>
+                    </ion-item>
+                    <ion-item class="no-style-list flora-text-size-large" ng-click="wortsucheEnable();"><i class="icon ion-ios-search-strong drawer-icon"></i>
+                        <div class="drawer-text">Wortsuche</div>
+                    </ion-item>
                     <!--<ion-item class="no-style-list" ng-click="hideFloradexOverlay();closeDrawer();"><i class="icon ion-shuffle"></i> Zufällige Pflanze</ion-item>-->
-                    <ion-item class="no-style-list" ng-click="herbariumShow();"><i class="icon ion-ios-book-outline"></i> Mein Herbarium</ion-item>
-                    <ion-item class="no-style-list" ng-click="guessTraits();"><i class="icon ion-lightbulb"></i> Bestimme die Merkmale</ion-item>
+                    <ion-item class="no-style-list flora-text-size-large" ng-click="herbariumShow();"><i class="icon ion-ios-star drawer-icon"></i>
+                        <div class="drawer-text">Mein Herbarium</div>
+                    </ion-item>
+
+                     <ion-item ng-if="resultMode == 'Baukasten'" class="no-list-border flora-text-size-large" ng-click="baukastenRemoveAllFilters()"><i class="icon ion-close drawer-icon"></i>
+                        <div class="drawer-text">Alle Filter löschen</div>
+                    </ion-item>
                 </ion-list>
                 <br>
                 <!-- <button class=" icon ion-close-round" ng-click="closeDrawer();modalFloradexImage.hide();"></button> -->
@@ -313,7 +341,7 @@
             <ion-modal-view style="width: calc(100% - 250px) !important; height: 100%; top: 0%; left: 0%; right: 250px; bottom: 0%;">
                 <ion-content class="floracolor-main" ng-click="hideFloradexOverlay();">
                     <ion-scroll zooming="true" direction="xy" scrollbar-x="true" scrollbar-y="true" delegate-handle="fullscreenScrollview" class="ion-scroll-height-fix" min-zoom="0.3">
-                        <img ng-src="{{currentMoreInfoPlant.associatedMedia}}" ng-click="hideFullscreenImageOverlay()">
+                        <img ng-src="{{ (currentMoreInfoPlant.altlink) ? currentMoreInfoPlant.altlink : currentMoreInfoPlant.associatedMedia}}" ng-click="hideFullscreenImageOverlay()">
                     </ion-scroll>
                     <div class="fullscreen-image-text-bubble" ng-click="hideFullscreenImageOverlay()">
                         Bild antippen um zu schließen

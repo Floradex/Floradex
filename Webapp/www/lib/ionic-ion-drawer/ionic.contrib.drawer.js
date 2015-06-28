@@ -29,7 +29,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
   var side = $attr.side === SIDE_LEFT ? SIDE_LEFT : SIDE_RIGHT;
   var width = el.clientWidth;
   var docWidth = $document[0].body.clientWidth;
-  console.log(docWidth)
+  //console.log(docWidth)
   
   // Handle back button
   var unregisterBackAction;

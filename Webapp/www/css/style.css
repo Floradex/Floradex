@@ -13,7 +13,21 @@ html * {
      pointer-events: none;
      /*opacity: 0.3;
     filter: alpha(opacity=30); // For IE
-    -moz-o*/pacity:0.3; // For Firefox < 5.0
+    -moz-opacity:0.3; // For Firefox < 5.0*/
+}
+
+.floradex-image-translucent {
+    max-width: 90px;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+}
+
+.main-content-title {
+     top: 1.65em;
+    left: 6em;
+    position: absolute;
+    color: white;
 }
 
 .grayscale {
@@ -140,8 +154,8 @@ html * {
 
 .vorschau-item-large {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 30px;
+    left: 5%;
     max-width: 90%;
     padding-top: 15%;
 }
@@ -247,6 +261,18 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 
 .flora-text-size-large {
     font-size: 20px !important;
+}
+
+.popover-header-title {
+    font-size: 20px !important;
+    min-width: 200px;
+}
+
+.popover-header-desc {
+    font-size: 10px !important;
+    position: absolute;
+    top: 23px;
+    left:7px;
 }
 
 .flora-menu .superMenuName {
@@ -364,10 +390,11 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
 .second-row-text-mi {
     float: left;
     height: 57px;
-    width: 100%;
     font-align: center;
     font-size: 10px;
     color: black;
+    width: 60px;
+
 }
 
 .flora-menu-mi li:hover {
@@ -454,6 +481,12 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     border: none;
 }
 
+.no-list-border {
+    background-color: #2A292E;
+    color: white;
+    border-bottom: 0px;
+}
+
 .main-menu-list {
     margin-top: 20em;
     padding-top: 10em;
@@ -462,7 +495,6 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     Sidebar always visible
 */
 
-@media (min-width: 600px) {
     .menu-content {
         right: 250px !important;
         width: calc(100% - 250px) !important;
@@ -471,7 +503,7 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
         width: 250px !important;
         z-index: 11;
     }
-}
+
 /* Sidebar content */
 
 .photo {
@@ -536,6 +568,19 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     background-color: #18171C !important;
 }
 
+.sidebar-footer-text {
+    padding-left: 0.7em;
+}
+
+.sidebar-above-list-button {
+    position: absolute;
+    top: -6px;
+    left: -1%;
+    width: 100%;
+    height: 8px;
+    background-color: #18171C !important;
+}
+
 .sidebar-footer .text {
     width: 100%;
     padding-top: 50px;
@@ -548,7 +593,15 @@ quelle http://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-cl
     position: absolute;
     font-size: 30px !important;
     top: 1.5em;
-    left: 1em;
+    left: 1.4em;
+}
+
+.flip {
+  -moz-transform: scaleX(-1) rotate(90deg) ;    /* Gecko */
+  -o-transform: scaleX(-1) rotate(90deg);      /* Operah */
+  -webkit-transform: scaleX(-1) rotate(90deg); /* webkit */
+  transform: scaleX(-1) rotate(90deg);         /* standard */
+  filter: FlipH;                 /* IE 6/7/8 */
 }
 
 /* 
@@ -561,6 +614,14 @@ Modal Overlay more info view tecnical stuff
 
 */
 
+.drawer-icon {
+    font-size: 20px !important;
+    position: absolute;
+}
+
+.drawer-text {
+    padding-left: 1.4em;
+}
 .button-large,
 .button-large .icon:before {
     color: white !important;
@@ -691,8 +752,4 @@ Modal Overlay more info view tecnical stuff
     margin-left: auto;
     margin-right: auto;
     width: 400px;
- }
-
- .modal-high {
-    z-index: 999;
  }
