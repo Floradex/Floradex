@@ -23,6 +23,13 @@ html * {
     -moz-opacity:0.3; // For Firefox < 5.0*/
 }
 
+.ocupacy-20 {
+     opacity: 0.8 !important;
+    filter: alpha(opacity=80) !important; // For IE
+    -moz-opacity:0.8 !important; // For Firefox < 5.0
+}
+
+
 .floradex-image-translucent {
     max-width: 90px;
     position: absolute;

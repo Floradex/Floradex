@@ -86,7 +86,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
 
 .controller('MainCtrl', function($ionicSideMenuDelegate, $scope, $ionicScrollDelegate, $ionicPopover, $ionicModal, Plants, MenuData, PlantStorage) { // $ionicPopover,
         // debugging:
-        var showModalViewsOnStartup = true;
+        var showModalViewsOnStartup = false;
         // setup
         ionic.Platform.ready(function() {
             $ionicSideMenuDelegate.canDragContent(false);
@@ -101,6 +101,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
 
         // vars
         var plantIdsLookup = {};
+        $scope.ganzePflanzeBg = "empty_ganz";
         //the saved plants from 'my herbarium', if plants were saved earlier
         $scope.herbarium = PlantStorage.init();
 
@@ -398,6 +399,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             }
             child.selected = !child.selected;
             if (child.selected) { // add
+
                 // disable previous one if same category
                 if ($scope.selectedMerkmale[parent.name]) {
                     $scope.selectedMerkmale[parent.name].selected = false;
@@ -408,6 +410,10 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 if (!child.parent) child.parent = parent;
                 $scope.selectedMerkmale[parent.name] = child;
 
+
+                // Set index
+                child.index = $scope.currentPopoverMenuItem.index;
+                
                 // Change color
                 if (parent.name == "Farbe") {
                     changeColorOfBlueteTo(child.name);
@@ -423,6 +429,10 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 // select
                 parent.selected = true;
 
+                // Wuchsform hack
+                if (parent.name == "Wuchsform") {
+                    $scope.ganzePflanzeBg = "Wuchsform";
+                } 
 
             } else { // remove
                 // remove stuff
@@ -435,6 +445,11 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 }
                 // change image back
                 parent.imageName = $scope.replaceAllSpecialCharactersInString(parent.name);
+
+                // wuchsform hack
+                if (parent.name == "Wuchsform") {
+                    $scope.ganzePflanzeBg = "empty_ganz";
+                }
             }
 
             updateResults();
@@ -642,8 +657,9 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             //http://forum.ionicframework.com/t/how-to-disable-content-scrolling/238/19
         });
 
-        $scope.showMenuPopover = function($event, data, superMenuData) {
+        $scope.showMenuPopover = function($event, data, superMenuData, index) {
             $scope.currentPopoverMenuItem = data;
+            $scope.currentPopoverMenuItem.index = index;
             data.hightlighted = true;
             $scope.currentPopoverMenuSuperItem = superMenuData;
             $scope.popover.show($event);

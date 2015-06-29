@@ -27,7 +27,7 @@
         <!--
 
 
-         MAIN CONTENT 
+         MAIN CONTENT
 
 
 
@@ -41,34 +41,35 @@
                 <div class="row">
                     <div class="col vorschau-div color-col-0">
                         <div ng-repeat="attribute in vorschauLebensform">
-                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
+                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : attribute.index + 2 }">
                         </div>
-                        <img src="resources/images/default/empty_ganz.png" class="vorschau-item-large" style="z-index= 1;">
+                        <img ng-src="resources/images/large/{{ganzePflanzeBg}}.png" class="vorschau-item-large" style="z-index= 1;">
                     </div>
                     <div class="col vorschau-div color-col-2">
                         <div ng-repeat="attribute in vorschauBlatt">
-                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
+                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : attribute.index + 2 }">
                         </div>
-                        <img src="resources/images/default/empty_blatt.png" class="vorschau-item-large" style=" z-index=1;">
+                        <img ng-if="vorschauBlatt.length == 0" src="resources/images/large/empty_blatt.png" class="vorschau-item-large" style=" z-index=1;">
                     </div>
                     <div class="col vorschau-div color-col-1">
                         <div ng-repeat="attribute in vorschauBluete">
-                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : $index + 2 }">
+                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' :  attribute.index + 2 }">
                         </div>
-                        <img id="vorschau-bild-mitte" src="resources/images/default/empty_bluete.png" class="vorschau-item-large" style="z-index= 1;">
+                        <img ng-if="vorschauBluete.length == 0" id="vorschau-bild-mitte" src="resources/images/large/empty_bluete.png" class="vorschau-item-large" style="z-index= 1;">
+
                     </div>
                 </div>
-                <!-- 
+                <!--
 
 
-                POPOVER MENU 
+                POPOVER MENU
 
 
                 -->
                 <script id="my-popover.html" type="text/ng-template">
-                    <ion-popover-view class="floracolor-yellow" style="height: 160px;
-                                                                      width: {{(currentPopoverMenuItem.children.length * 75 < 400) ? 400 : (currentPopoverMenuItem.children.length * 75) + 'px' }};">
-                        <ion-header-bar class="popover-header floracolor-yellow-darker bar-top-no-border ">
+                    <ion-popover-view class="floracolor-yellow ocupacy-20" style="height: 160px;
+                                                                width: {{currentPopoverMenuItem.children.length * 75 + 'px' }};">
+                        <ion-header-bar class="popover-header floracolor-yellow bar-top-no-border ">
                             <div class="popover-header-title flora-text-size-large">{{currentPopoverMenuItem.name}}</div>
                             <div class="popover-header-desc"> {{popoverTextForMerkmal(currentPopoverMenuItem.name)}}</div>
                         </ion-header-bar>
@@ -83,17 +84,17 @@
                         </ion-content>
                     </ion-popover-view>
                 </script>
-                <!-- 
+                <!--
 
 
-                Eigentliches Menü 
+                Eigentliches Menü
 
 
                 -->
                 <div ng-class="(isMoreInfosViewOpen() || resultMode == 'MeinHerbarium') ? 'menu-not-clickable flora-menu bg-gradient-dark' : 'flora-menu bg-gradient-dark'">
                     <div class="submenu" ng-repeat="superMenuData in menuData">
                         <ul>
-                            <li ng-class="(data.hightlighted == true) ? (data.selected == true) ? 'floramenu-li-item-highlighted' : 'floramenu-li-item-highlighted' : (data.selected == true) ? 'floramenu-li-item-selected-{{$parent.$index}}' : ''" ng-repeat="data in superMenuData.children" ng-click="showMenuPopover($event, data, superMenuData)">
+                            <li ng-class="(data.hightlighted == true) ? (data.selected == true) ? 'floramenu-li-item-highlighted' : 'floramenu-li-item-highlighted' : (data.selected == true) ? 'floramenu-li-item-selected-{{$parent.$index}}' : ''" ng-repeat="data in superMenuData.children" ng-click="showMenuPopover($event, data, superMenuData, $index)">
                                 <img id="{{ 'menuImg-' + replaceAllSpecialCharactersInString(data.name) }}" ng-class="(data.selected == true) ? 'second-row-image ' : 'second-row-image'" ng-src="resources/images/menu/{{getImageName(data)}}.png">
                                 <!--  <br> {{ data.name | limitTo:10 }} -->
                             </li>
@@ -103,12 +104,12 @@
                 </div>
             </ion-content>
         </ion-side-menu-content>
-        <!--      
-        
+        <!--
 
 
-        SIDEBAR      
-        
+
+        SIDEBAR
+
 
          -->
         <ion-side-menu side="right">
@@ -129,7 +130,7 @@
                     <i class="icon ion-ios-search-strong sidebar-footer-magnifier"></i> {{countOfResults}} Pflanzen</div>
             </ion-footer-bar>
         </ion-side-menu>
-        <!-- 
+        <!--
 
 
         SERACH PLANT MODAL VIEW
@@ -158,7 +159,7 @@
         <!--
 
 
-         MODAL VIEW MORE INFOS 
+         MODAL VIEW MORE INFOS
 
 
          -->
@@ -289,7 +290,7 @@
                 </div>
             </ion-modal-view>
         </script>
-        <!-- 
+        <!--
 
 
          START SCREEN MODAL VIEW
@@ -306,10 +307,10 @@
                 </ion-content>
             </ion-modal-view>
         </script>
-        <!--     
+        <!--
 
 
-         DRAWER        
+         DRAWER
 
 
           -->
@@ -338,7 +339,7 @@
                 <!-- <button class=" icon ion-close-round" ng-click="closeDrawer();modalFloradexImage.hide();"></button> -->
             </ion-content>
         </drawer>
-        <!-- 
+        <!--
 
 
          FULL SCREEN IMAGE MODAL VIEW
