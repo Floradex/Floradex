@@ -152,7 +152,7 @@ public class Data {
 	
 	@Override
 	public String toString() {
-		String ret = "[name=" + this.name + ", Information: " + this.information.toString() + ", URLs: " + this.urls.toString() + "]" + "\nCollection:\n";
+		String ret = "\tname=" + this.name + "\n\tInformation:\n\t\t" + this.information.toString().replace(",", ",\n\t\t").replace("{", "").replace("}", "") + "\n\tURLs: " + this.urls.toString() + "]\n";
 		return ret;
 	}
 }
