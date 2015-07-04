@@ -16,7 +16,7 @@ Für den Quellcode dieses Projekts gilt die GNU General Public Licence 2.0
 
 Diese kann hier nachgelesen werden http://choosealicense.com/licenses/gpl-2.0/
 
-Für die Bilder, die im Rahmen dieses Projekts veröffentlicht wurden und die bei Veröffentlichung unter keiner Lizenz standen, gilt die Creative Commons Lizenz CC BY-NC-SA
+Für die Bilder, die im Rahmen dieses Projekts erstellt wurden und die bei Veröffentlichung unter keiner Lizenz standen, gilt die Creative Commons Lizenz CC BY-NC-SA
 
 - Namensnennung - keine kommerzielle Nutzung - Weitergabe unter gleichen Bedingungen
 - Einsehbar ist die Lizenz hier https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
