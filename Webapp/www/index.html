@@ -30,7 +30,6 @@
          MAIN CONTENT
 
 
-
          -->
         <ion-side-menu-content>
             <ion-content class="bg-gradient-meh" scroll="false">
@@ -39,24 +38,43 @@
                     {{ getCurrentTitle(); }}
                 </div>
                 <div class="row">
-                    <div class="col vorschau-div color-col-0">
+                    <div class="col vorschau-div color-col-0"  ng-class="(resultMode == 'MeinHerbarium') ? 'ocupacy-30' : ''">
                         <div ng-repeat="attribute in vorschauLebensform">
-                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : attribute.index + 2 }">
+                            <img ng-src="resources/images/large/{{
+
+                                (attribute.secondRow == 'ganz') ?
+                            replaceAllSpecialCharactersInString(attribute.name) + '-2' : 
+ replaceAllSpecialCharactersInString(attribute.name)  
+
+                            }}.png" class="vorschau-item-large" ng-style="{ 'z-index' : attribute.index + 2 }">
                         </div>
                         <img ng-src="resources/images/large/{{ganzePflanzeBg}}.png" class="vorschau-item-large" style="z-index= 1;">
+                         <img ng-if="row2Ganz" ng-src="resources/images/large/{{row2Ganz}}.png" class="vorschau-item-large high">
                     </div>
-                    <div class="col vorschau-div color-col-2">
+                    <div class="col vorschau-div color-col-2"  ng-class="(resultMode == 'MeinHerbarium') ? 'ocupacy-30' : ''">
                         <div ng-repeat="attribute in vorschauBlatt">
-                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' : attribute.index + 2 }">
-                        </div>
-                        <img ng-if="vorschauBlatt.length == 0" src="resources/images/large/empty_blatt.png" class="vorschau-item-large" style=" z-index=1;">
-                    </div>
-                    <div class="col vorschau-div color-col-1">
-                        <div ng-repeat="attribute in vorschauBluete">
-                            <img ng-src="resources/images/large/{{replaceAllSpecialCharactersInString(attribute.name)}}.png" class="vorschau-item-large" ng-style="{ 'z-index' :  attribute.index + 2 }">
-                        </div>
-                        <img ng-if="vorschauBluete.length == 0" id="vorschau-bild-mitte" src="resources/images/large/empty_bluete.png" class="vorschau-item-large" style="z-index= 1;">
+                            <img ng-src="resources/images/large/{{
+                              (attribute.secondRow == 'blatt') ?
+                            replaceAllSpecialCharactersInString(attribute.name) + '-2' : 
+ replaceAllSpecialCharactersInString(attribute.name)  
 
+                            }}.png" class="vorschau-item-large" ng-style="{ 'z-index' : (attribute.parent.name != 'Blattnerven') ? attribute.index + 2 : 10 }">
+                        </div>
+                        <img src="resources/images/large/empty_blatt.png" class="vorschau-item-large" style=" z-index=1;">
+                        <img ng-if="row2Blatt" ng-src="resources/images/large/{{row2Blatt}}.png" class="vorschau-item-large high" >
+                    </div>
+                    <div class="col vorschau-div color-col-1"  ng-class="(resultMode == 'MeinHerbarium') ? 'ocupacy-30' : ''">
+                        <div ng-repeat="attribute in vorschauBluete">
+                            <img id="{{(attribute.parent.name == 'Form/Symmetrie') ? 'vorschau-bild-mitte' : '' }}" ng-src="resources/images/large/{{
+                                  (attribute.secondRow == 'bluete') ?
+                            replaceAllSpecialCharactersInString(attribute.name) + '-2' : 
+ replaceAllSpecialCharactersInString(attribute.name)  
+
+                            }}.png" class="vorschau-item-large" ng-style="{ 'z-index' :  attribute.index + 2 }">
+                        </div>
+                        <img src="resources/images/large/empty_bluete.png" class="vorschau-item-large" style="z-index= 1;">
+                         <img ng-if="row2Bluete" ng-src="resources/images/large/{{row2Bluete}}.png" class="vorschau-item-large high" >
+                        
                     </div>
                 </div>
                 <!--
@@ -67,7 +85,7 @@
 
                 -->
                 <script id="my-popover.html" type="text/ng-template">
-                    <ion-popover-view class="floracolor-yellow ocupacy-20" style="height: 160px;
+                    <ion-popover-view class="floracolor-yellow ocupacy-20 redasda" style="height: 160px;
                                                                 width: {{currentPopoverMenuItem.children.length * 75 + 'px' }};">
                         <ion-header-bar class="popover-header floracolor-yellow bar-top-no-border ">
                             <div class="popover-header-title flora-text-size-large">{{currentPopoverMenuItem.name}}</div>
@@ -142,7 +160,7 @@
                 <ion-header-bar class="bar-top-no-border floracolor-main">
                     <h1 class="title"></h1>
                     <div class="buttons">
-                        <button class="button button-clear button-assertive icon ion-ios-close-outline " ng-click="hideSearchModal(true)" />
+                        <button  class="button button-clear icon ion-ios-close-empty round-bg button-color margin-right margin-top" ng-click="hideSearchModal(true)" />
                     </div>
                 </ion-header-bar>
                 <ion-content class="search-modal floracolor-main">

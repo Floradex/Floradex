@@ -85,6 +85,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
     })
 
 .controller('MainCtrl', function($ionicSideMenuDelegate, $scope, $ionicScrollDelegate, $ionicPopover, $ionicModal, Plants, MenuData, PlantStorage) { // $ionicPopover,
+
         // debugging:
         var showModalViewsOnStartup = false;
         // setup
@@ -92,10 +93,10 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
             $ionicSideMenuDelegate.canDragContent(false);
         });
 
-         var allNames = ["Anne Lange", "Paul Michaelis", "Philipp Schroeter", "Immanuel Pelzer"];
-            allNames = _.shuffle(allNames);
-       $scope.getAllNamesInRandom = function() { 
-           
+        var allNames = ["Anne Lange", "Paul Michaelis", "Philipp Schroeter", "Immanuel Pelzer"];
+        allNames = _.shuffle(allNames);
+        $scope.getAllNamesInRandom = function() {
+
             return allNames[0] + ", " + allNames[1] + ", " + allNames[2] + ", " + allNames[3];
         }
 
@@ -119,6 +120,13 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         $scope.vorschauBluete = [];
         $scope.vorschauKopf = [];
         $scope.vorschauBlatt = [];
+        //  Kreise
+        $scope.row2Ganz = null;
+        $scope.row2Blatt = null;
+        $scope.row2Bluete = null;
+
+
+
         // Modal view
         $scope.imageSrc = '';
         $scope.moreInfosSettings = {
@@ -360,7 +368,13 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 var key = keys[i];
                 var value = $scope.selectedMerkmale[key];
                 value.parent.selected = false;
+                value.parent.imageName = $scope.replaceAllSpecialCharactersInString(value.parent.name);
             };
+
+            if ($scope.selectedMerkmale["Farbe"] != null) {
+                $scope.selectedMerkmale["Farbe"].selected = false;
+            }
+
             $scope.vorschauLebensform = [];
             $scope.vorschauBluete = [];
             $scope.vorschauKopf = [];
@@ -372,9 +386,13 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
 
 
         // Selection logic
-        $scope.menuSelectItem = function(child, parent, grandparent) {
+        $scope.menuSelectItem = function(child, parent, grandparent, dontDoIt) {
             if (child.name == "fragezeichen") { // Handle fragezeichen
                 child.selected = !child.selected;
+                // change color back to white
+                if (parent.name == "Farbe") {
+                    changeColorOfBlueteTo("weiß");
+                }
                 // change image to child image
                 if (child.selected) {
                     // disable previous one if same category
@@ -392,13 +410,15 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 } else {
                     parent.selected = false;
                     parent.imageName = $scope.replaceAllSpecialCharactersInString(parent.name);
-
                 }
                 updateResults();
                 return;
             }
             child.selected = !child.selected;
             if (child.selected) { // add
+
+                // disable fragezeichen
+                obj = _.find(parent.children, function(obj) { return obj.name == 'fragezeichen' }).selected = false;
 
                 // disable previous one if same category
                 if ($scope.selectedMerkmale[parent.name]) {
@@ -413,15 +433,38 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
 
                 // Set index
                 child.index = $scope.currentPopoverMenuItem.index;
-                
+
                 // Change color
                 if (parent.name == "Farbe") {
+                    if ($scope.selectedMerkmale["Form/Symmetrie"] == null) {
+                        var menuData = $scope.menuData;
+                        // Sort it and add random class
+                        var lookup = {};
+                        for (var i = 0, len = menuData.length; i < len; i++) {
+                            lookup[menuData[i].name] = menuData[i]; // Make Lookup 
+                        }
+                        var bluete = lookup["Blüte"];
+                        lookup = {};
+                        for (var i = 0, len = bluete.children.length; i < len; i++) {
+                            lookup[bluete.children[i].name] = bluete.children[i]; // Make Lookup 
+                        }
+                        var formsymetrie = lookup["Form/Symmetrie"];
+
+                        lookup = {};
+                        for (var i = 0, len = formsymetrie.children.length; i < len; i++) {
+                            lookup[formsymetrie.children[i].name] = formsymetrie.children[i]; // Make Lookup 
+                        }
+                        var fuenf = lookup["radförmig fünfzählig"];
+
+                        $scope.menuSelectItem(fuenf, formsymetrie, bluete, true);
+
+
+                    }
                     changeColorOfBlueteTo(child.name);
                 } else {
                     // add to vorschau
                     addRemove("add", grandparent.name, child);
                 }
-
                 // change image to child image
                 parent.imageName = $scope.getImageName(child);
                 // invert image
@@ -432,7 +475,15 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 // Wuchsform hack
                 if (parent.name == "Wuchsform") {
                     $scope.ganzePflanzeBg = "Wuchsform";
-                } 
+                }
+
+                // apply color if form/symmertie
+                if (parent.name == "Form/Symmetrie" && !dontDoIt) {
+                    if ($scope.selectedMerkmale["Farbe"]) {
+                        changeColorOfBlueteTo($scope.selectedMerkmale["Farbe"].name);
+                    }
+
+                }
 
             } else { // remove
                 // remove stuff
@@ -459,25 +510,25 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         function changeColorOfBlueteTo(color) {
                 Caman("#vorschau-bild-mitte", function() {
                     if (color == "blau") {
-                        this.colorize("#0000FF", 100).render();
+                        this.colorize("#0A446D", 100).render();
                     } else if (color == "weiß") {
                         this.colorize("#FFFFFF", 100).render();
                     } else if (color == "gelb") {
-                        this.colorize("#FFF200", 100).render();
+                        this.colorize("#FEF035", 100).render();
                     } else if (color == "rosa") {
-                        this.colorize("#C975B0", 100).render();
+                        this.colorize("#C877AF", 100).render();
                     } else if (color == "violett") {
                         this.colorize("#5A2B68", 100).render();
-                    }else if (color == "orange") {
+                    } else if (color == "orange") {
                         this.colorize("#F38030", 100).render();
-                    }else if (color == "blau") {
-                        this.colorize("#03436E", 100).render();
-                    }else if (color == "grün") {
-                        this.colorize("#00A04E", 100).render();
-                    }else if (color == "braun") {
-                        this.colorize("#635847", 100).render();
+                    } else if (color == "blau") {
+                        this.colorize("#09446D", 100).render();
+                    } else if (color == "grün") {
+                        this.colorize("#6DB04A", 100).render();
+                    } else if (color == "braun") {
+                        this.colorize("#655A49", 100).render();
                     } else if (color == "rot") {
-                        this.colorize("#B82025", 100).render();
+                        this.colorize("#B6222A", 100).render();
                     } else { // Weiß
                         this.colorize("#FFFFFF", 100).render();
                     }
@@ -490,12 +541,20 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                 this.invert().render();
             });
         }
-
+        var stringCache = {};
         // repace all special characters in string
         $scope.replaceAllSpecialCharactersInString = function(string) {
-            //console.log(string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '').replace(/[äÄöÖüÜ]/g, ''));
             if (string == undefined) return "undefined";
-            return string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '').replace(/[äÄöÖüÜ]/g, '');
+            var cache = stringCache[string];
+            if (cache != null) {
+                return cache;
+            } else {
+                //console.log(string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '').replace(/[äÄöÖüÜ]/g, ''));
+                var newString = string.replace(/[^a-zA-Z]+/, '').replace(/ /g, '').replace(/[äÄöÖüÜ]/g, '');
+                stringCache[string] = newString;
+                return newString;
+            }
+
         }
 
         function updateResults() { // TODO make performant, should not calculate everything again every time
@@ -516,7 +575,6 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                     allIdsWithWeight[merkmal.plantIds[i]]++;
                 }
             }
-
             // make results
             var results = [];
 
@@ -546,6 +604,12 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                     $scope.vorschauKopf.push(object);
                 } else if (name == "Blatt") {
                     $scope.vorschauBlatt.push(object);
+
+                    // Also push to seperate vorschau
+                    if (object.parent.name == "Gliederung") {
+                        object.secondRow = "bluete"; // Wo es angezeigt werden soll. bluete,ganz, blatt
+                        $scope.vorschauBluete.push(object);
+                    }
                 }
             } else { // remove
                 if (name == "Ganze Pflanze") {
@@ -556,6 +620,12 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
                     remove($scope.vorschauKopf, object);
                 } else if (name == "Blatt") {
                     remove($scope.vorschauBlatt, object);
+
+                    // Also remove to seperate vorschau
+                    if (object.parent.name == "Gliederung") {
+                        object.secondRow = null;
+                        remove($scope.vorschauBluete, object);
+                    }
                 }
 
             }
@@ -629,6 +699,7 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         }
 
         $scope.herbariumShow = function() {
+             $scope.baukastenRemoveAllFilters();
             $scope.hideSearchModal();
             $scope.hideFloradexOverlay();
             $scope.closeDrawer();
@@ -658,12 +729,25 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         });
 
         $scope.showMenuPopover = function($event, data, superMenuData, index) {
+
             $scope.currentPopoverMenuItem = data;
             $scope.currentPopoverMenuItem.index = index;
             data.hightlighted = true;
             $scope.currentPopoverMenuSuperItem = superMenuData;
+
             $scope.popover.show($event);
         };
+
+        // after popover is shown
+        $scope.$on('popover.shown', function() {
+            if ($scope.currentPopoverMenuSuperItem.name == "Ganze Pflanze") {
+                $scope.row2Ganz = $scope.replaceAllSpecialCharactersInString($scope.currentPopoverMenuItem.name);
+            } else if ($scope.currentPopoverMenuSuperItem.name == "Blatt") {
+                $scope.row2Blatt = $scope.replaceAllSpecialCharactersInString($scope.currentPopoverMenuItem.name);
+            } else if ($scope.currentPopoverMenuSuperItem.name == "Blüte") {
+                $scope.row2Bluete = $scope.replaceAllSpecialCharactersInString($scope.currentPopoverMenuItem.name);
+            }
+        });
 
         $scope.closePopover = function() {
             $scope.popover.hide();
@@ -673,10 +757,20 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         $scope.$on('$destroy', function() {
             $scope.popover.remove();
         });
+
+
+
         $scope.$on('popover.hidden', function() {
 
             $scope.currentPopoverMenuItem.hightlighted = false;
-            //$scope.currentPopoverMenuItem = null;
+            $scope.currentPopoverMenuItem = null;
+            if ($scope.currentPopoverMenuSuperItem.name == "Ganze Pflanze") {
+                $scope.row2Ganz = null;
+            } else if ($scope.currentPopoverMenuSuperItem.name == "Blatt") {
+                $scope.row2Blatt = null;
+            } else if ($scope.currentPopoverMenuSuperItem.name == "Blüte") {
+                $scope.row2Bluete = null;
+            }
         });
         $scope.$on('popover.removed', function() {
             // Execute action
@@ -815,12 +909,12 @@ angular.module('floradex', ['ionic', 'ionic.contrib.drawer', 'uiGmapgoogle-maps'
         // More info
 
         $scope.showImage = function(plant) {
-           // console.log(plant.SampleID)
+            // console.log(plant.SampleID)
             if ($scope.resultMode == "SearchResults") {
                 $scope.hideSearchModal();
                 $scope.openModal();
             }
-           // console.log(plant.SampleID)
+            // console.log(plant.SampleID)
 
             if ($scope.currentMoreInfoPlant != undefined) $scope.currentMoreInfoPlant.isShownInModalView = false;
             plant.isShownInModalView = true; // gelbe umrandung

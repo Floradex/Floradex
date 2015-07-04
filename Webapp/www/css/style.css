@@ -4,6 +4,7 @@ html * {
     font-family: Calibri, sans-serif !important;
     font-size: 20px;
 }
+
 /* 
     Colors
 
@@ -18,9 +19,15 @@ html * {
  
 .menu-not-clickable {
      pointer-events: none;
-     /*opacity: 0.3;
-    filter: alpha(opacity=30); // For IE
-    -moz-opacity:0.3; // For Firefox < 5.0*/
+     opacity: 0.0;
+    filter: alpha(opacity=00); // For IE
+    -moz-opacity:0.0; // For Firefox < 5.0
+}
+
+.ocupacy-30 {
+  opacity: 0.3 !important;
+    filter: alpha(opacity=30) !important; // For IE
+    -moz-opacity:0.3 !important; // For Firefox < 5.0
 }
 
 .ocupacy-20 {
@@ -188,10 +195,15 @@ html * {
 		/*-webkit-transform:translate(5%,0%);*/ /* Chrome*/
 		position: absolute;
 		top: 30px;
-		left: 5%;
-		max-width: 90%;
-		padding-top: 15%;
+		left: 10%;
+		max-width: 80%;
+		padding-top: 16%;
+
 	}
+
+    .high {
+          z-index: 100;
+    }
 /*}*/
 
 .vorschau-div {

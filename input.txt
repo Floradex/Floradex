@@ -923,3 +923,33 @@ Armeria maritima subsp. elongata (Hoffm.) Bonnier
 			BLUETE: trichterförmig
 		Kategorie: Anordnung
 			BLUETE: Köpfchen
+Calendula officinalis L.
+	Kategorie: Ganze Pflanze
+		Kategorie: Wuchsform
+			LEBENSFORM: Kraut/Staude
+		Kategorie: Querschnitt der Sprossachse
+			LEBENSFORM: kantig
+		Kategorie: Stellung an der Sprossachse
+			LEBENSFORM: wechselständig
+		Kategorie: Blattgrund
+			LEBENSFORM: sitzend
+	Kategorie: Blatt
+		Kategorie: Gliederung
+			BLATT: einfach
+		Kategorie: Blattform
+			BLATT: spatelelig
+			BLATT: lanzettlich
+		Kategorie: Blattrand
+			BLATT: ganzrandig
+		Kategorie: Blattnerven
+			BLATT: einnervig
+	Kategorie: Blüte
+		Kategorie: Farbe
+			BLUETE: gelb
+			BLUETE: orange
+		Kategorie: Blütenorientierung
+			BLUETE: aufrecht
+		Kategorie: Form/Symmetrie
+			BLUETE: radförmig vielzählig
+		Kategorie: Anordnung
+			BLUETE: Körbchen
